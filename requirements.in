@@ -1,0 +1,3 @@
+networkx
+numpy
+-e git+https://github.com/rgmining/common.git#egg=rgmining_common-0.9.0
