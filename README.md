@@ -1,0 +1,13 @@
+# An implementation of Fraud Eagle algorithm
+[![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
+[![Build Status](https://travis-ci.org/rgmining/fraud-eagle.svg?branch=master)](https://travis-ci.org/rgmining/fraud-eagle)
+[![Code Climate](https://codeclimate.com/github/rgmining/fraud-eagle/badges/gpa.svg)](https://codeclimate.com/github/rgmining/fraud-eagle)
+[![Release](https://img.shields.io/badge/release-0.9.0-brightgreen.svg)](https://github.com/rgmining/fraud-eagle/releases/tag/v0.9.0)
+
+This algorithm has been introduced by Leman Akoglu, *et al.* in
+[AAAI 2013](https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338)
+
+
+## License
+This software is released under The GNU General Public License Version 3,
+see [COPYING](COPYING) for more detail.
