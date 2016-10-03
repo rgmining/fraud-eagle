@@ -14,17 +14,6 @@
 <meta content="summary" name="twitter:card" />
 <meta content="@junkawamoto" name="twitter:site" />
 
-<style>
-.wy-menu-vertical{
-  position: relative;
-  height:auto !important;
-  height: 100%;
-  min-height: 100%;
-}
-.wy-menu-vertical > *:first-child{
-  padding-bottom: 600px;
-}
-</style>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
   (adsbygoogle = window.adsbygoogle || []).push({
@@ -44,8 +33,14 @@
 
 
 {% block menu %}
-{{ super() }}
-<div style="padding: 2em 0; height: 600px; bottom: 0; position: absolute;">
+<div class="local-toc">{{ toc }}</div>
+<hr/>
+{% set toctree = toctree(maxdepth=theme_navigation_depth, collapse=theme_collapse_navigation, includehidden=True) %}
+{% if toctree %}
+  {{ toctree }}
+{% endif %}
+<hr />
+<div>
   <div style="width: 300px; margin: auto;">
     <ins class="adsbygoogle"
          style="display:inline-block;width:300px;height:600px"
