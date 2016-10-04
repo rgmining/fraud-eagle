@@ -15,6 +15,9 @@ Their paper `Opinion Fraud Detection in Online Reviews by Network
 Effects <https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338>`_
 is available online. See it for more information.
 
+This package is a part of `Review Graph Mining Project </>`_
+which provides other algorithms, datasets, and helper libraries.
+
 
 Installation
 --------------
