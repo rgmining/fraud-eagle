@@ -24,26 +24,6 @@
 from setuptools import setup, find_packages
 
 
-def _take_package_name(name):
-    """Returns only package name from a given name.
-
-    If the given name is a URL, it takes only package name. Otherwise,
-    returns the given name.
-
-    Args:
-      name: a package name or URL.
-
-    Returns:
-      the associated package name.
-    """
-    name = name.strip()
-    if name.startswith("-e"):
-        name = name.split("=")[1]
-        return name.split("-")[0]
-    else:
-        return name
-
-
 def _load_requires_from_file(filepath):
     """Read a package list from a given file path.
 
@@ -54,7 +34,7 @@ def _load_requires_from_file(filepath):
       a list of package names.
     """
     with open(filepath) as fp:
-        return [_take_package_name(pkg_name) for pkg_name in fp.readlines()]
+        return [pkg_name.strip() for pkg_name in fp.readlines()]
 
 
 setup(
@@ -66,8 +46,15 @@ setup(
     url="https://github.com/rgmining/frad-eagle",
     packages=find_packages(exclude=["tests"]),
     install_requires=_load_requires_from_file("requirements.txt"),
-    dependency_links=[
-        "git+https://github.com/rgmining/common.git#egg=rgmining_common-0.9.0"
-    ],
-    test_suite='tests.suite'
+    test_suite='tests.suite',
+    license="GPLv3",
+    classifiers=[
+            "Development Status :: 4 - Beta",
+            "Intended Audience :: Science/Research",
+            "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+            "Natural Language :: English",
+            "Programming Language :: Python",
+            "Topic :: Software Development :: Libraries",
+            "Topic :: Scientific/Engineering :: Information Analysis"
+        ]
 )
