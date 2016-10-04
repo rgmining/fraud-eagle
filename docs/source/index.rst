@@ -16,6 +16,15 @@ Effects <https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/63
 is available online. See it for more information.
 
 
+Installation
+--------------
+Use `pip` to install this package.
+
+.. code-block:: bash
+
+   pip install --upgrade rgmining-fraud-eagle
+
+
 Graph model
 -------------
 Fraud Eagle algorithm assumes review data are represented in a bipartite graph.
@@ -150,7 +159,7 @@ anomalous. The score is normalized in 0 to 1. To obtain that score,
 use :meth:`anomalous_score<fraud_eagle.graph.Reviewer.anomalous_score>`
 property.
 
-The :class:`ReviewGraph<fraud_eagle.graph.ReviewGraph` has
+The :class:`ReviewGraph<fraud_eagle.graph.ReviewGraph>` has
 :meth:`reviewers<fraud_eagle.graph.ReviewGraph.reviewers>` property,
 which returns a collection of reviewers the graph has.
 Thus, the following code outputs all reviewers' anomalous score.
@@ -167,7 +176,7 @@ The summarized ratings are also normalized in 0 to 1.
 summarized rating.
 
 The :class:`ReviewGraph<fraud_eagle.graph.ReviewGraph>` also has
-:meth:`products<fraud_eagle.graph.ReviewGraph.products` property,
+:meth:`products<fraud_eagle.graph.ReviewGraph.products>` property,
 which returns a collection of products.
 Thus, the following code outputs all products' summarized ratings.
 
