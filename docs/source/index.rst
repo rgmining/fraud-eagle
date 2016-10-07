@@ -9,8 +9,8 @@ consisting of reviewer nodes and products nodes.
 The aim of Fraud Eagle is finding fraudsters and fake reviews given by them.
 
 This algorithm has been introduced by Leman Akoglu *et al.* in
-`the Twenty-Seventh Conference on Artificial Intelligence
-<http://www.aaai.org/Conferences/AAAI/aaai13.php>`_.
+`the 7th International AAAI Conference onf Weblogs and Social Media
+<http://www.icwsm.org/2013/>`_.
 Their paper `Opinion Fraud Detection in Online Reviews by Network
 Effects <https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338>`_
 is available online. See it for more information.

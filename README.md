@@ -7,7 +7,7 @@
 
 This package provides an implementation of Fraud Eagle algorithm.
 This algorithm has been introduced by Leman Akoglu, *et al.* in
-[AAAI 2013](https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338)
+[ICWSM 2013](https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338)
 
 See [the documents](https://rgmining.github.io/fraud-eagle/) for more information.
 
