@@ -1,3 +1,5 @@
+.. _top:
+
 An implementation of Fraud Eagle
 ===================================
 .. raw:: html
@@ -196,13 +198,6 @@ API Reference
   :maxdepth: 2
 
   modules/*
-
-
-Indices and tables
---------------------
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
 
 License

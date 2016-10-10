@@ -128,6 +128,12 @@ todo_include_todos = False
 # To add GitHub link.
 rst_prolog = """
 :github_url: https://github.com/rgmining/fraud-eagle
+:base_url: https://rgmining.github.io/fraud-eagle/
+:description: Fraud Eagle is an algorithm working on review graph,
+    which is a bipartite graph consisting of reviewer nodes and products nodes.
+    The aim of Fraud Eagle is finding fraudsters and fake reviews given by them.
+    This algorithm has been introduced by Leman Akoglu *et al.* in
+    the 7th International AAAI Conference onf Weblogs and Social Media.
 """
 
 # -- Options for HTML output ----------------------------------------------
@@ -141,9 +147,9 @@ html_theme = "sphinx_rtd_theme"
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {
-    'collapse_navigation': True
-}
+# html_theme_options = {
+#     'collapse_navigation': True
+# }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
@@ -226,7 +232,7 @@ html_static_path = ['_static']
 # contain a <link> tag referring to it.  The value of this option must be the
 # base URL from which the finished HTML is served.
 #
-# html_use_opensearch = ''
+html_use_opensearch = 'https://docs.python.org'
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 # html_file_suffix = None
