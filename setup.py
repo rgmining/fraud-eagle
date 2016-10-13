@@ -49,12 +49,12 @@ setup(
     test_suite='tests.suite',
     license="GPLv3",
     classifiers=[
-            "Development Status :: 4 - Beta",
-            "Intended Audience :: Science/Research",
-            "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-            "Natural Language :: English",
-            "Programming Language :: Python",
-            "Topic :: Software Development :: Libraries",
-            "Topic :: Scientific/Engineering :: Information Analysis"
-        ]
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Natural Language :: English",
+        "Programming Language :: Python",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Scientific/Engineering :: Information Analysis"
+    ]
 )
