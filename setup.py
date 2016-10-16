@@ -39,7 +39,7 @@ def _load_requires_from_file(filepath):
 
 setup(
     name='rgmining-fraud-eagle',
-    version='0.9.1',
+    version='0.9.2',
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description="An implementation of Fraud Eagle algorithm",
