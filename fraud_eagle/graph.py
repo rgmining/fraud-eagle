@@ -123,7 +123,7 @@ class Product(_Node):
         reviewers = self.graph.retrieve_reviewers(self)
         ratings = [self.graph.retrieve_review(
             r, self).rating for r in reviewers]
-        weights = [r.anomalous_score for r in reviewers]
+        weights = [1 - r.anomalous_score for r in reviewers]
         if sum(weights) == 0:
             return np.mean(ratings)
         else:

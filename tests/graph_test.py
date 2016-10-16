@@ -602,7 +602,7 @@ class TestProduct(unittest.TestCase):
         reviews[2].update_user_to_product(BAD, np.log(0.2))
 
         ratings = [review.rating for review in reviews.values()]
-        weights = [r.anomalous_score for r in reviewers]
+        weights = [1 - r.anomalous_score for r in reviewers]
 
         self.assertAlmostEqual(
             product.summary, np.average(ratings, weights=weights))
