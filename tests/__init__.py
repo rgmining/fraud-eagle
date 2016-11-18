@@ -19,4 +19,7 @@
 # along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 #
 from __future__ import absolute_import
+import logging
 from tests.test_suite import suite
+
+logging.basicConfig(level=logging.INFO)

@@ -21,6 +21,7 @@
 """Provide a bipartite graph class implementing Fraud Eagle algorithm.
 """
 from __future__ import absolute_import, division
+from logging import getLogger
 import networkx as nx
 import numpy as np
 from fraud_eagle.constants import HONEST, FRAUD, GOOD, BAD, PLUS, MINUS
@@ -28,6 +29,9 @@ from fraud_eagle.likelihood import psi
 from fraud_eagle.prior import phi_p, phi_u
 from common import memoized
 
+
+LOGGER = getLogger(__name__)
+"""Logging object."""
 
 _LOG_POINT_5 = np.log(0.5)
 """Precomputed value, the logarithm of 0.5."""
@@ -442,7 +446,7 @@ class ReviewGraph(object):
           maximum difference between an old message value and its updated new
           value.
         """
-        diff = -1
+        diffs = []
         # Update messages from users to products.
         for reviewer in self.reviewers:
             for product in self.retrieve_products(reviewer):
@@ -454,7 +458,7 @@ class ReviewGraph(object):
                 review = self.retrieve_review(reviewer, product)
                 for plabel in (GOOD, BAD):
                     updated = new[plabel] - s
-                    diff = max(diff, abs(
+                    diffs.append(abs(
                         np.exp(review.user_to_product(plabel)) - np.exp(updated)))
                     review.update_user_to_product(plabel, updated)
 
@@ -469,11 +473,17 @@ class ReviewGraph(object):
                 review = self.retrieve_review(reviewer, product)
                 for ulabel in (HONEST, FRAUD):
                     updated = new[ulabel] - s
-                    diff = max(diff, abs(
+                    diffs.append(abs(
                         np.exp(review.product_to_user(ulabel)) - np.exp(updated)))
                     review.update_product_to_user(ulabel, updated)
 
-        return diff
+        histo, edges = np.histogram(diffs)
+        LOGGER.info(
+            "Differentials:\n" + "\n".join(
+                "  {0}-{1}: {2}".format(
+                    edges[i], edges[i+1], v) for i, v in enumerate(histo)))
+
+        return max(diffs)
 
     def _update_user_to_product(self, reviewer, product, plabel):
         """Compute an updated message from a user to a product with a product label.
