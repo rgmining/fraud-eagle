@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-decorator==4.0.10         # via networkx
-networkx==1.11
-numpy==1.11.1
-rgmining-common==0.9.0
+decorator>=4.0.10         # via networkx
+networkx>=1.11
+numpy>=1.11.1
+rgmining-common>=0.9.0
