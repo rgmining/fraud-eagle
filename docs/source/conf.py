@@ -128,12 +128,6 @@ todo_include_todos = False
 # To add GitHub link.
 rst_prolog = """
 :github_url: https://github.com/rgmining/fraud-eagle
-:base_url: https://rgmining.github.io/fraud-eagle/
-:description: Fraud Eagle is an algorithm working on review graph,
-    which is a bipartite graph consisting of reviewer nodes and products nodes.
-    The aim of Fraud Eagle is finding fraudsters and fake reviews given by them.
-    This algorithm has been introduced by Leman Akoglu *et al.* in
-    the 7th International AAAI Conference onf Weblogs and Social Media.
 """
 
 # -- Options for HTML output ----------------------------------------------
@@ -142,6 +136,15 @@ rst_prolog = """
 # a list of builtin themes.
 #
 html_theme = "sphinx_rtd_theme"
+
+html_context = {
+    "base_url": "https://rgmining.github.io/fraud-eagle/",
+    "twitter": "@junkawamoto",
+    "google_analytics": "UA-82315630-2",
+    "google_adsense": "ca-pub-4734862314145555",
+    "google_adsense_slot": "6934003829",
+    "addthis": "ra-57f1fa5b740feddd"
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
