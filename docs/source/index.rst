@@ -1,3 +1,9 @@
+:description: Fraud Eagle is an algorithm working on review graph,
+    which is a bipartite graph consisting of reviewer nodes and products nodes.
+    The aim of Fraud Eagle is finding fraudsters and fake reviews given by them.
+    This algorithm has been introduced by Leman Akoglu *et al.* in
+    the 7th International AAAI Conference onf Weblogs and Social Media.
+
 .. _top:
 
 An implementation of Fraud Eagle
