@@ -24,17 +24,31 @@
 from setuptools import setup, find_packages
 
 
-def _load_requires_from_file(filepath):
+def take_package_name(name):
+    """Returns a package name.
+    """
+    if name.startswith("-e"):
+        return name[name.find("=")+1:name.rfind("-")]
+    else:
+        return name.strip()
+
+
+def load_requires_from_file(filepath):
     """Read a package list from a given file path.
-
-    Args:
-      filepath: file path of the package list.
-
-    Returns:
-      a list of package names.
     """
     with open(filepath) as fp:
-        return [pkg_name.strip() for pkg_name in fp.readlines()]
+        return [take_package_name(pkg_name) for pkg_name in fp.readlines()]
+
+
+def load_links_from_file(filepath):
+    """Read a package list and returns links.
+    """
+    res = []
+    with open(filepath) as fp:
+        for pkg_name in fp.readlines():
+            if pkg_name.startswith("-e"):
+                res.append(pkg_name.split(" ")[1])
+    return res
 
 
 setup(
@@ -45,7 +59,8 @@ setup(
     description="An implementation of Fraud Eagle algorithm",
     url="https://github.com/rgmining/frad-eagle",
     packages=find_packages(exclude=["tests"]),
-    install_requires=_load_requires_from_file("requirements.txt"),
+    install_requires=load_requires_from_file("requirements.txt"),
+    dependency_links=load_links_from_file("requirements.txt"),
     test_suite='tests.suite',
     license="GPLv3",
     classifiers=[
