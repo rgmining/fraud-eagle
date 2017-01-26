@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-decorator>=4.0.10         # via networkx
+decorator>=4.0.11         # via networkx
 networkx>=1.11
-numpy>=1.11.1
--e git+https://github.com/rgmining/common#egg=rgmining-common-master
+numpy>=1.12.0
+rgmining-common>=0.9.0

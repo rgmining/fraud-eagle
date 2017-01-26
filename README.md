@@ -6,6 +6,8 @@
 [![Release](https://img.shields.io/badge/release-0.9.5-brightgreen.svg)](https://github.com/rgmining/fraud-eagle/releases/tag/v0.9.5)
 [![Japanese](https://img.shields.io/badge/qiita-%E6%97%A5%E6%9C%AC%E8%AA%9E-brightgreen.svg)](http://qiita.com/jkawamoto/items/d2284316cc37cd810bfd)
 
+[![Logo](https://rgmining.github.io/fraud-eagle/_static/image.png)](https://rgmining.github.io/fraud-eagle/)
+
 This package provides an implementation of Fraud Eagle algorithm.
 This algorithm has been introduced by Leman Akoglu, *et al.* in
 [ICWSM 2013](https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338)

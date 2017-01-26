@@ -1,7 +1,7 @@
 #
 # setup.py
 #
-# Copyright (c) 2016 Junpei Kawamoto
+# Copyright (c) 2016-2017 Junpei Kawamoto
 #
 # This file is part of rgmining-fraud-eagle.
 #
@@ -16,7 +16,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+# along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
 #
 # pylint: skip-file
 """Package information of fraud_eagle package for review graph mining project.
@@ -24,43 +24,38 @@
 from setuptools import setup, find_packages
 
 
-def take_package_name(name):
-    """Returns a package name.
+def read(fname):
+    """Read a file.
     """
-    if name.startswith("-e"):
-        return name[name.find("=")+1:name.rfind("-")]
-    else:
-        return name.strip()
+    return open(path.join(path.dirname(__file__), fname)).read()
 
 
 def load_requires_from_file(filepath):
     """Read a package list from a given file path.
+
+    Args:
+      filepath: file path of the package list.
+
+    Returns:
+      a list of package names.
     """
     with open(filepath) as fp:
-        return [take_package_name(pkg_name) for pkg_name in fp.readlines()]
-
-
-def load_links_from_file(filepath):
-    """Read a package list and returns links.
-    """
-    res = []
-    with open(filepath) as fp:
-        for pkg_name in fp.readlines():
-            if pkg_name.startswith("-e"):
-                res.append(pkg_name.split(" ")[1])
-    return res
+        return [pkg_name.strip() for pkg_name in fp.readlines()]
 
 
 setup(
     name='rgmining-fraud-eagle',
-    version='0.9.5',
+    use_scm_version=True,
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description="An implementation of Fraud Eagle algorithm",
+    long_description=read("README.rst"),
     url="https://github.com/rgmining/frad-eagle",
     packages=find_packages(exclude=["tests"]),
+    setup_requires=[
+        "setuptools_scm"
+    ],
     install_requires=load_requires_from_file("requirements.txt"),
-    dependency_links=load_links_from_file("requirements.txt"),
     test_suite='tests.suite',
     license="GPLv3",
     classifiers=[
