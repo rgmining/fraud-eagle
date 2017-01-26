@@ -21,6 +21,7 @@
 # pylint: skip-file
 """Package information of fraud_eagle package for review graph mining project.
 """
+from os import path
 from setuptools import setup, find_packages
 
 

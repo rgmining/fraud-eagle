@@ -209,4 +209,5 @@ API Reference
 License
 ---------
 This software is released under The GNU General Public License Version 3,
-see COPYING for more detail.
+see `COPYING <https://github.com/rgmining/fraud-eagle/blob/master/COPYING>`_
+for more detail.

@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: skip-file
 #
-# Review Graph Mining Common Library documentation build configuration file, created by
-# sphinx-quickstart on Sun Oct  2 00:54:40 2016.
-#
 # This file is execfile()d with the current directory set to its
 # containing dir.
 #
@@ -61,7 +58,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Fraud Eagle'
-copyright = u'2016, Junpei Kawamoto'
+copyright = u'2016-2017, Junpei Kawamoto'
 author = u'Junpei Kawamoto'
 
 # The version info for the project you're documenting, acts as replacement for

@@ -1,19 +1,14 @@
 Fraud Eagle Algorithm
 =====================
 
-| |GPLv3|
-| |Build Status|
-| |wercker status|
-| |Code Climate|
-| |Release|
-| |Japanese|
+|GPLv3| |Build Status| |wercker status| |Code Climate| |Release|
+|Japanese|
 
 |Logo|
 
-| This package provides an implementation of Fraud Eagle algorithm.
-| This algorithm has been introduced by Leman Akoglu, *et al.* in
-| `ICWSM
-  2013 <https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338>`__
+This package provides an implementation of Fraud Eagle algorithm. This
+algorithm has been introduced by Leman Akoglu, *et al.* in `ICWSM
+2013 <https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338>`__
 
 See `the documents <https://rgmining.github.io/fraud-eagle/>`__ for more
 information.
@@ -30,9 +25,10 @@ Use ``pip`` to install this package.
 License
 -------
 
-| This software is released under The GNU General Public License Version
-  3,
-| see `COPYING <COPYING>`__ for more detail.
+This software is released under The GNU General Public License Version
+3, see
+`COPYING <https://github.com/rgmining/fraud-eagle/blob/master/COPYING>`__
+for more detail.
 
 .. |GPLv3| image:: https://img.shields.io/badge/license-GPLv3-blue.svg
    :target: https://www.gnu.org/copyleft/gpl.html

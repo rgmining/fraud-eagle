@@ -24,4 +24,4 @@ pip install --upgrade rgmining-fraud-eagle
 
 ## License
 This software is released under The GNU General Public License Version 3,
-see [COPYING](COPYING) for more detail.
+see [COPYING](https://github.com/rgmining/fraud-eagle/blob/master/COPYING) for more detail.
