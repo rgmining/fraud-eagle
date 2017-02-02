@@ -1,5 +1,14 @@
 language: python
 python:
-  - "2.7"
+- '2.7'
 script:
-  - python setup.py test
+- python setup.py test
+deploy:
+  provider: pypi
+  user: jkawamoto
+  password:
+    secure: H1qw78xAArGHdwktvP6TqKPst7C5YN7WjDISr1kLzdWmy1D5pMxbhOO/0s+lP9El8U69i7pNUi85NGx6qnLTtbUA6OJUMmjGIQSv+xyV1NRMqSeYjrqBvNyu0PE/CdwXQs3HkiECa0wTER3luxyKBNweVYXr0EbtU1/vXxKtuMX3p/hlq6ApWDwqjEMRB4CtVAnKL2ViseRQyMpTX+KK4ixMvTKTXI16UcSZKc8utW6AeyYgVpunzgJhuTovFIHdb94ljwGmWsghj3G3Cet7F/QwdsA9IxZ/lbBz0XA4hXPjwD6Uu1wX9Zvzqv4dIFKkwV2rBd7b44Z6jyXraY6XitPSrO3gS+PEPmKHYtaMDHeTqIy5Y3e/iyG6ldvFVxTf2yhHJoluM0O5JaikQkAAs5LeGmknqMPsCNw3kvXPMBmdOZynqTHoEWQFP8dbPzdFjnK/iXpf3nJ1Gwn0J4BmfVIMvnHUAcx92j2YGczXxOXEatS8wa37ZOEDeulxJI3R7Y0NLIm9rJjnMlHD1fo5fCiANnW+j15s+o1i0ynnvjgpqc+ZonXQiL7TdKPM4KHA3UJ3BEI1kZXVLz6sJqEKbb8xveM0Wsau14LI+zBeR4K53gj4MbXuE+0bZ8uRJPGoFEr0AgH9YkHiix1Gb0oq9SVf5BCY1iRVHfIMu4ydXbk=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: rgmining/fraud-eagle
