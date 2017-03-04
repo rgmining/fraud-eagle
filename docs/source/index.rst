@@ -51,7 +51,7 @@ Here is a sample of the bipartite graph.
 .. graphviz::
 
    digraph bipartite {
-      graph [label="Sample bipartite graph.", rankdir = LR];
+      graph [label="Bipartite graph example.", rankdir = LR];
       "reviewer-0";
       "reviewer-1";
       "product-0";
@@ -109,7 +109,7 @@ like the below.
 .. graphviz::
 
    digraph bipartite {
-      graph [label="Sample bipartite graph.", rankdir = LR];
+      graph [label="Bipartite graph example.", rankdir = LR];
       "reviewer-0";
       "reviewer-1";
       "product-0";
