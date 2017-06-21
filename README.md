@@ -18,7 +18,7 @@ See [the documents](https://rgmining.github.io/fraud-eagle/) for more informatio
 ## Installation
 Use `pip` to install this package.
 
-```
+```shell
 pip install --upgrade rgmining-fraud-eagle
 ```
 
