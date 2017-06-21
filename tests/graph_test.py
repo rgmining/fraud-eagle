@@ -212,7 +212,7 @@ class TestReviewGraphWithASampleGraph(unittest.TestCase):
         """
         threshold = 10**-7
         diff = 0.
-        for i in xrange(10000):
+        for i in range(10000):
             diff = self.graph.update()
             if diff < threshold:
                 print(
@@ -280,10 +280,12 @@ class TestReviewGraph(unittest.TestCase):
         reviews[2].update_user_to_product(BAD, np.log(0.2))
 
         self.assertAlmostEqual(
-            np.exp(self.graph.prod_message_from_users(reviewers[0], product, GOOD)),
+            np.exp(self.graph.prod_message_from_users(
+                reviewers[0], product, GOOD)),
             0.6 * 0.8)
         self.assertAlmostEqual(
-            np.exp(self.graph.prod_message_from_users(reviewers[1], product, BAD)),
+            np.exp(self.graph.prod_message_from_users(
+                reviewers[1], product, BAD)),
             0.6 * 0.2)
 
         # Test for giving None as the reviewer, which means considering all
@@ -355,7 +357,8 @@ class TestReviewGraph(unittest.TestCase):
         # Test for giving None as the product, which means considering all
         # products.
         self.assertAlmostEqual(
-            np.exp(self.graph.prod_message_from_products(reviewer, None, HONEST)),
+            np.exp(self.graph.prod_message_from_products(
+                reviewer, None, HONEST)),
             0.4 * 0.6 * 0.8)
         self.assertAlmostEqual(
             np.exp(self.graph.prod_message_from_products(reviewer, None, FRAUD)),
