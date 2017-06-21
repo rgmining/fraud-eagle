@@ -38,8 +38,8 @@ for more detail.
    :target: https://app.wercker.com/project/byKey/fb1061f0043991bf7609a198a96acbaf
 .. |Code Climate| image:: https://codeclimate.com/github/rgmining/fraud-eagle/badges/gpa.svg
    :target: https://codeclimate.com/github/rgmining/fraud-eagle
-.. |Release| image:: https://img.shields.io/badge/release-0.9.5-brightgreen.svg
-   :target: https://github.com/rgmining/fraud-eagle/releases/tag/v0.9.5
+.. |Release| image:: https://img.shields.io/badge/release-0.9.6-brightgreen.svg
+   :target: https://github.com/rgmining/fraud-eagle/releases/tag/v0.9.6
 .. |Japanese| image:: https://img.shields.io/badge/qiita-%E6%97%A5%E6%9C%AC%E8%AA%9E-brightgreen.svg
    :target: http://qiita.com/jkawamoto/items/d2284316cc37cd810bfd
 .. |Logo| image:: https://rgmining.github.io/fraud-eagle/_static/image.png
