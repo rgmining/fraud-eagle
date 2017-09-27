@@ -157,7 +157,7 @@ Thus, you should set some limitation to the iterations.
 
       # Run one iteration.
       diff = graph.update()
-      print("Iteration %d ends. (diff=%s)", i + 1, diff)
+      print("Iteration {0} ends. (diff={1})".format(i + 1, diff))
 
       if diff < 10**-5: # Set 10^-5 as an acceptable small number.
           break
