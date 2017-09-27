@@ -351,7 +351,7 @@ class ReviewGraph(object):
         if not isinstance(product, Product):
             raise ValueError(
                 "Given product isn't an instance of Product:", product)
-        return self.graph.predecessors(product)
+        return list(self.graph.predecessors(product))
 
     @memoized
     def retrieve_products(self, reviewer):
@@ -369,7 +369,7 @@ class ReviewGraph(object):
         if not isinstance(reviewer, Reviewer):
             raise ValueError(
                 "Given reviewer isn't an instance of Reviewer:", reviewer)
-        return self.graph.successors(reviewer)
+        return list(self.graph.successors(reviewer))
 
     @memoized
     def retrieve_review(self, reviewer, product):
@@ -481,7 +481,7 @@ class ReviewGraph(object):
         LOGGER.info(
             "Differentials:\n" + "\n".join(
                 "  {0}-{1}: {2}".format(
-                    edges[i], edges[i+1], v) for i, v in enumerate(histo)))
+                    edges[i], edges[i + 1], v) for i, v in enumerate(histo)))
 
         return max(diffs)
 
