@@ -42,6 +42,8 @@ class TestReview(unittest.TestCase):
         self.assertEqual(r1.evaluation, MINUS)
         r2 = Review(0.9)
         self.assertEqual(r2.evaluation, PLUS)
+        r3 = Review(0.5)
+        self.assertEqual(r2.evaluation, PLUS)
 
     def test_update_user_to_product(self):
         """Test updating user-to-product message.
