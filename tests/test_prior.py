@@ -1,5 +1,5 @@
 #
-#  __init__.py
+#  test_prior.py
 #
 #  Copyright (c) 2016-2023 Junpei Kawamoto
 #
@@ -17,5 +17,23 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
-"""Define tests for fraud_eagle package.
+"""Tests for prior module in fraud_eagle package.
 """
+import numpy as np
+
+from fraud_eagle.constants import HONEST, FRAUD, GOOD, BAD
+from fraud_eagle.prior import phi_u, phi_p
+
+
+def test_phi_u():
+    """Test with possible inputs.
+    """
+    assert phi_u(HONEST) == np.log(2)
+    assert phi_u(FRAUD) == np.log(2)
+
+
+def test_phi_p():
+    """Test with possible inputs.
+    """
+    assert phi_p(GOOD) == np.log(2)
+    assert phi_p(BAD) == np.log(2)
