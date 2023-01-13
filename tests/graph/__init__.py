@@ -17,5 +17,5 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
-"""Define tests for fraud_eagle package.
+"""Define tests for graph module.
 """
