@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "rgmining-fraud-eagle"
+version = "0.9.7"
+description = "An implementation of Fraud Eagle algorithm"
+license = "GPL-3.0-only"
+authors = ["Junpei Kawamoto <kawamoto.junpei@gmail.com>"]
+readme = "README.rst"
+homepage = "https://rgmining.github.io/frad-eagle/"
+repository = "https://github.com/rgmining/frad-eagle"
+documentation = "https://rgmining.github.io/frad-eagle/"
+keywords = ["review", "graph", "mining", "algorithm", "icwsm", "fraud-eagle"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Scientific/Engineering :: Information Analysis"
+]
+packages = [
+    { include = "fraud_eagle" },
+]
+include = ["COPYING"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.24.1"
+networkx = "^3.0"
+rgmining-common = "^0.9.1"
+
+[tool.poetry.group.dev.dependencies]
+bump2version = "^1.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
