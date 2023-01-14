@@ -560,6 +560,36 @@ class ReviewGraph(object):
                 + phi_p(plabel) \
                 + self.prod_message_from_users(reviewer, product, plabel)
         return np.logaddexp(*res.values())
+  
+    @memoized 
+    def prod_message_from_all_users(self, product, plabel):
+        """Compute a product of messages to a product.
+
+        This helper function computes a logarithm of the product of messages such as
+
+        .. math::
+            \\prod_{Y_{k} \\in \\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}}
+            m_{k\\rightarrow j}(y_{j}),
+
+        where :math:`\\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}` means a set
+        of reviewers who review the given product except the given reviewer,
+        :math:`y_{j}` is a product label and one of the {GOOD, BAD}.
+
+        If reviewer is None, compute a product of all messages sending to the
+        product.
+
+        Args:
+          product : Product,
+          plabel: product label
+
+        Returns:
+          a logarithm of the product defined above.
+        """
+        reviewers = set(self.retrieve_reviewers(product))
+        return np.sum([
+            self.retrieve_review(r, product).user_to_product(plabel)
+            for r in reviewers
+        ])
 
     def prod_message_from_users(self, reviewer, product, plabel):
         """Compute a product of messages to a product except from a reviewer.
@@ -567,8 +597,8 @@ class ReviewGraph(object):
         This helper function computes a logarithm of the product of messages such as
 
         .. math::
-           \\prod_{Y_{k} \\in \\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/user}
-           m_{k\\rightarrow j}(y_{j}),
+            \\prod_{Y_{k} \\in \\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/user}
+            m_{k\\rightarrow j}(y_{j}),
 
         where :math:`\\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/user` means a set
         of reviewers who review the given product except the given reviewer,
@@ -585,10 +615,40 @@ class ReviewGraph(object):
         Returns:
           a logarithm of the product defined above.
         """
-        reviewers = set(self.retrieve_reviewers(product)) - set([reviewer])
+        sum_all = self.prod_message_from_all_users(product,plabel)
+        sum_reviewer = 0
+        if reviewer is not None:
+          sum_reviewer = self.retrieve_review(reviewer, product).user_to_product(plabel)
+        return sum_all - sum_reviewer
+
+    @memoized
+    def prod_message_from_all_products(self,reviewer,ulabel):
+        """Compute a product of messages sending to a reviewer.
+
+          This helper function computes a logarithm of the product of messages such as
+
+          .. math::
+            \\prod_{Y_{k} \\in \\cal{N}_{i} \\cap \\cal{Y}^{\\cal{P}}}
+            m_{k \\rightarrow i}(y_{i}),
+
+          where :math:`\\cal{N}_{i} \\cap \\cal{Y}^{\\cal{P}}` means a set
+          of products the given reviewer reviews,
+          :math:`y_{i}` is a user label and one of the {HONEST, FRAUD}.
+
+          If product is None, compute a product of all messages sending to the
+          reviewer.
+
+          Args:
+            reviewer: reviewer object,
+            ulabel: user label.
+
+          Returns:
+            a logarithm of the product defined above.
+        """
+        products = set(self.retrieve_products(reviewer))
         return np.sum([
-            self.retrieve_review(r, product).user_to_product(plabel)
-            for r in reviewers
+            self.retrieve_review(reviewer, p).product_to_user(ulabel)
+            for p in products
         ])
 
     def prod_message_from_products(self, reviewer, product, ulabel):
@@ -615,8 +675,9 @@ class ReviewGraph(object):
         Returns:
           a logarithm of the product defined above.
         """
-        products = set(self.retrieve_products(reviewer)) - set([product])
-        return np.sum([
-            self.retrieve_review(reviewer, p).product_to_user(ulabel)
-            for p in products
-        ])
+        sum_all = self.prod_message_from_all_products(reviewer,ulabel)
+        sum_product = 0
+        if product is not None:
+          sum_product = self.retrieve_review(reviewer, product).product_to_user(ulabel)
+
+        return sum_all - sum_product
