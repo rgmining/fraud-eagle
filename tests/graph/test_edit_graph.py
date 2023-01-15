@@ -28,11 +28,11 @@ from fraud_eagle import ReviewGraph
 
 
 @pytest.fixture
-def review_graph():
+def review_graph() -> ReviewGraph:
     return ReviewGraph(0.1)
 
 
-def test_new_reviewer(review_graph):
+def test_new_reviewer(review_graph: ReviewGraph) -> None:
     """Test new reviewer has a given name.
     """
     name = "test-name"
@@ -41,7 +41,7 @@ def test_new_reviewer(review_graph):
     assert reviewer in nx.nodes(review_graph.graph)
 
 
-def test_new_product(review_graph):
+def test_new_product(review_graph: ReviewGraph) -> None:
     """Test new product has a given name.
     """
     name = "test-product"
@@ -50,7 +50,7 @@ def test_new_product(review_graph):
     assert product in nx.nodes(review_graph.graph)
 
 
-def test_add_review(review_graph):
+def test_add_review(review_graph: ReviewGraph) -> None:
     """Test adding a review.
     """
     reviewer = review_graph.new_reviewer("test-reviewer")

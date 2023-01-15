@@ -23,10 +23,10 @@ import numpy as np
 from numpy.testing import assert_almost_equal
 
 from fraud_eagle import ReviewGraph
-from fraud_eagle.constants import HONEST, FRAUD
+from fraud_eagle.labels import UserLabel
 
 
-def test_anomalous_score():
+def test_anomalous_score() -> None:
     """Test anomalous_score property.
 
     In this test, we assume the following review graph,
@@ -69,12 +69,12 @@ def test_anomalous_score():
         1: graph.add_review(reviewer, products[1], 0),
         2: graph.add_review(reviewer, products[2], 1)
     }
-    reviews[0].update_product_to_user(HONEST, np.log(0.3))
-    reviews[0].update_product_to_user(FRAUD, np.log(0.7))
-    reviews[1].update_product_to_user(HONEST, np.log(0.6))
-    reviews[1].update_product_to_user(FRAUD, np.log(0.4))
-    reviews[2].update_product_to_user(HONEST, np.log(0.8))
-    reviews[2].update_product_to_user(FRAUD, np.log(0.2))
+    reviews[0].update_product_to_user(UserLabel.HONEST, np.log(0.3))
+    reviews[0].update_product_to_user(UserLabel.FRAUD, np.log(0.7))
+    reviews[1].update_product_to_user(UserLabel.HONEST, np.log(0.6))
+    reviews[1].update_product_to_user(UserLabel.FRAUD, np.log(0.4))
+    reviews[2].update_product_to_user(UserLabel.HONEST, np.log(0.8))
+    reviews[2].update_product_to_user(UserLabel.FRAUD, np.log(0.2))
 
     b_honest = 2 * 0.3 * 0.6 * 0.8
     b_fraud = 2 * 0.7 * 0.4 * 0.2
