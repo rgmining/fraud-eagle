@@ -33,8 +33,7 @@ def review_graph() -> ReviewGraph:
 
 
 def test_new_reviewer(review_graph: ReviewGraph) -> None:
-    """Test new reviewer has a given name.
-    """
+    """Test new reviewer has a given name."""
     name = "test-name"
     reviewer = review_graph.new_reviewer(name)
     assert reviewer.name == name
@@ -42,8 +41,7 @@ def test_new_reviewer(review_graph: ReviewGraph) -> None:
 
 
 def test_new_product(review_graph: ReviewGraph) -> None:
-    """Test new product has a given name.
-    """
+    """Test new product has a given name."""
     name = "test-product"
     product = review_graph.new_product(name)
     assert product.name == name
@@ -51,8 +49,7 @@ def test_new_product(review_graph: ReviewGraph) -> None:
 
 
 def test_add_review(review_graph: ReviewGraph) -> None:
-    """Test adding a review.
-    """
+    """Test adding a review."""
     reviewer = review_graph.new_reviewer("test-reviewer")
     product = review_graph.new_product("test-product")
     rating = random.randint(1, 5)

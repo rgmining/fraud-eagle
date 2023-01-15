@@ -25,6 +25,7 @@ from typing import Final
 
 class ReviewLabel(Enum):
     """Review label."""
+
     PLUS: Final = auto()
     """Constant representing "+" review."""
     MINUS: Final = auto()
@@ -33,6 +34,7 @@ class ReviewLabel(Enum):
 
 class ProductLabel(Enum):
     """Product label."""
+
     GOOD: Final = auto()
     """Constant representing the good label for products."""
     BAD: Final = auto()
@@ -41,6 +43,7 @@ class ProductLabel(Enum):
 
 class UserLabel(Enum):
     """User label."""
+
     HONEST: Final = auto()
     """Constant representing the honest label for users."""
     FRAUD: Final = auto()

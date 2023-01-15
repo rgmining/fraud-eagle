@@ -71,20 +71,17 @@ def review_graph() -> GraphFixture:
 
 
 def test_reviewers(review_graph: GraphFixture) -> None:
-    """Test reviewers' property.
-    """
+    """Test reviewers' property."""
     assert set(review_graph.graph.reviewers) == set(review_graph.reviewers)
 
 
 def test_products(review_graph: GraphFixture) -> None:
-    """Test products' property.
-    """
+    """Test products' property."""
     assert set(review_graph.graph.products) == set(review_graph.products)
 
 
 def test_retrieve_reviewers(review_graph: GraphFixture) -> None:
-    """Test retrieving reviewers from a product.
-    """
+    """Test retrieving reviewers from a product."""
     assert set(review_graph.graph.retrieve_reviewers(review_graph.products[0])) == set(review_graph.reviewers[:1])
     assert set(review_graph.graph.retrieve_reviewers(review_graph.products[1])) == set(review_graph.reviewers)
     assert set(review_graph.graph.retrieve_reviewers(review_graph.products[2])) == set(review_graph.reviewers)
@@ -113,10 +110,9 @@ def test_retrieve_review(review_graph: GraphFixture) -> None:
 
 
 def test_update(review_graph: GraphFixture) -> None:
-    """Test update method and check the update differences are converged.
-    """
-    threshold = 10 ** -7
-    diff = 0.
+    """Test update method and check the update differences are converged."""
+    threshold = 10**-7
+    diff = 0.0
     for i in range(10000):
         diff = review_graph.graph.update()
         if diff < threshold:

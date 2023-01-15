@@ -19,13 +19,12 @@
 #  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
 """Tests for likelihood module in fraud_eagle package.
 """
-from fraud_eagle.labels import UserLabel, ProductLabel, ReviewLabel
+from fraud_eagle.labels import ProductLabel, ReviewLabel, UserLabel
 from fraud_eagle.likelihood import psi
 
 
 def test_psi() -> None:
-    """Test for all possible input combinations.
-    """
+    """Test for all possible input combinations."""
     for epsilon in (0.01, 0.1, 0.5):
         assert psi(UserLabel.HONEST, ProductLabel.GOOD, ReviewLabel.PLUS, epsilon) == 1 - epsilon
         assert psi(UserLabel.HONEST, ProductLabel.GOOD, ReviewLabel.MINUS, epsilon) == epsilon
