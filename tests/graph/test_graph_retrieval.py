@@ -28,6 +28,7 @@ from random import random
 import pytest
 
 from fraud_eagle import ReviewGraph
+from fraud_eagle.graph import Review
 
 
 @dataclass
@@ -39,7 +40,7 @@ class GraphFixture:
 
 
 @pytest.fixture
-def review_graph():
+def review_graph() -> GraphFixture:
     """Returns a graph and makes a sample graph defined as
 
     .. graphviz::
@@ -62,26 +63,26 @@ def review_graph():
     graph = ReviewGraph(0.1)
     reviewers = [graph.new_reviewer(f"reviewer-{i}") for i in range(2)]
     products = [graph.new_product(f"product-{i}") for i in range(3)]
-    reviews = defaultdict(dict)
+    reviews = defaultdict[int, dict[int, Review]](dict)
     for i, r in enumerate(reviewers):
         for j in range(i, len(products)):
             reviews[i][j] = graph.add_review(r, products[j], random())
     return GraphFixture(graph, reviewers, products, reviews)
 
 
-def test_reviewers(review_graph):
+def test_reviewers(review_graph: GraphFixture) -> None:
     """Test reviewers' property.
     """
     assert set(review_graph.graph.reviewers) == set(review_graph.reviewers)
 
 
-def test_products(review_graph):
+def test_products(review_graph: GraphFixture) -> None:
     """Test products' property.
     """
     assert set(review_graph.graph.products) == set(review_graph.products)
 
 
-def test_retrieve_reviewers(review_graph):
+def test_retrieve_reviewers(review_graph: GraphFixture) -> None:
     """Test retrieving reviewers from a product.
     """
     assert set(review_graph.graph.retrieve_reviewers(review_graph.products[0])) == set(review_graph.reviewers[:1])
@@ -89,7 +90,7 @@ def test_retrieve_reviewers(review_graph):
     assert set(review_graph.graph.retrieve_reviewers(review_graph.products[2])) == set(review_graph.reviewers)
 
 
-def test_retrieve_products(review_graph):
+def test_retrieve_products(review_graph: GraphFixture) -> None:
     """Test retrieving products from a reviewer
 
     Sample graph used in this test is as same as
@@ -99,7 +100,7 @@ def test_retrieve_products(review_graph):
     assert set(review_graph.graph.retrieve_products(review_graph.reviewers[1])) == set(review_graph.products[1:])
 
 
-def test_retrieve_review(review_graph):
+def test_retrieve_review(review_graph: GraphFixture) -> None:
     """Test retrieving reviews from a reviewer and a product.
 
     Sample graph used in this test is as same as
@@ -111,7 +112,7 @@ def test_retrieve_review(review_graph):
                 assert review_graph.graph.retrieve_review(r, p) == review_graph.reviews[i][j]
 
 
-def test_update(review_graph):
+def test_update(review_graph: GraphFixture) -> None:
     """Test update method and check the update differences are converged.
     """
     threshold = 10 ** -7

@@ -1,5 +1,5 @@
 #
-#  __init__.py
+#  labels.py
 #
 #  Copyright (c) 2016-2023 Junpei Kawamoto
 #
@@ -17,15 +17,31 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
-"""An implementation of Fraud Eagle algorithm.
-
-This algorithm has been introduced by Leman Akoglu, *et al.* in `ICWSM 2013`_.
-
-.. _ICWSM 2013: https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338
-
+"""Define constants used in Fraud Eagle package.
 """
+from enum import Enum, auto
 from typing import Final
 
-from fraud_eagle.graph import ReviewGraph
 
-__all__: Final = ("ReviewGraph",)
+class ReviewLabel(Enum):
+    """Review label."""
+    PLUS: Final = auto()
+    """Constant representing "+" review."""
+    MINUS: Final = auto()
+    """Constant representing "-" review."""
+
+
+class ProductLabel(Enum):
+    """Product label."""
+    GOOD: Final = auto()
+    """Constant representing the good label for products."""
+    BAD: Final = auto()
+    """Constant representing the bad label for products."""
+
+
+class UserLabel(Enum):
+    """User label."""
+    HONEST: Final = auto()
+    """Constant representing the honest label for users."""
+    FRAUD: Final = auto()
+    """Constant representing the fraud label for users."""

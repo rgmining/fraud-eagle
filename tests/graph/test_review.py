@@ -22,39 +22,39 @@
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-from fraud_eagle.constants import MINUS, PLUS, GOOD, BAD, HONEST, FRAUD
+from fraud_eagle.labels import ReviewLabel, ProductLabel, UserLabel
 from fraud_eagle.graph import Review
 
 
-def test_evaluation():
+def test_evaluation() -> None:
     """Test evaluation returns collect labels.
     """
     r1 = Review(0.2)
-    assert r1.evaluation == MINUS
+    assert r1.evaluation == ReviewLabel.MINUS
 
     r2 = Review(0.9)
-    assert r2.evaluation == PLUS
+    assert r2.evaluation == ReviewLabel.PLUS
 
 
-def test_update_user_to_product():
+def test_update_user_to_product() -> None:
     """Test updating user-to-product message.
     """
     r = Review(1)
-    assert_almost_equal(r.user_to_product(GOOD), np.log(0.5))
-    assert_almost_equal(r.user_to_product(BAD), np.log(0.5))
-    r.update_user_to_product(GOOD, np.log(0.7))
-    r.update_user_to_product(BAD, np.log(0.3))
-    assert_almost_equal(r.user_to_product(GOOD), np.log(0.7))
-    assert_almost_equal(r.user_to_product(BAD), np.log(0.3))
+    assert_almost_equal(r.user_to_product(ProductLabel.GOOD), np.log(0.5))
+    assert_almost_equal(r.user_to_product(ProductLabel.BAD), np.log(0.5))
+    r.update_user_to_product(ProductLabel.GOOD, np.log(0.7))
+    r.update_user_to_product(ProductLabel.BAD, np.log(0.3))
+    assert_almost_equal(r.user_to_product(ProductLabel.GOOD), np.log(0.7))
+    assert_almost_equal(r.user_to_product(ProductLabel.BAD), np.log(0.3))
 
 
-def test_update_product_to_user():
+def test_update_product_to_user() -> None:
     """Test updating product-to-user message.
     """
     r = Review(1)
-    assert_almost_equal(r.product_to_user(HONEST), np.log(0.5))
-    assert_almost_equal(r.product_to_user(FRAUD), np.log(0.5))
-    r.update_product_to_user(HONEST, np.log(0.7))
-    r.update_product_to_user(FRAUD, np.log(0.3))
-    assert_almost_equal(r.product_to_user(HONEST), np.log(0.7))
-    assert_almost_equal(r.product_to_user(FRAUD), np.log(0.3))
+    assert_almost_equal(r.product_to_user(UserLabel.HONEST), np.log(0.5))
+    assert_almost_equal(r.product_to_user(UserLabel.FRAUD), np.log(0.5))
+    r.update_product_to_user(UserLabel.HONEST, np.log(0.7))
+    r.update_product_to_user(UserLabel.FRAUD, np.log(0.3))
+    assert_almost_equal(r.product_to_user(UserLabel.HONEST), np.log(0.7))
+    assert_almost_equal(r.product_to_user(UserLabel.FRAUD), np.log(0.3))

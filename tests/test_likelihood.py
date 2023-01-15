@@ -19,20 +19,20 @@
 #  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
 """Tests for likelihood module in fraud_eagle package.
 """
-from fraud_eagle.constants import PLUS, MINUS, GOOD, BAD, HONEST, FRAUD
+from fraud_eagle.labels import UserLabel, ProductLabel, ReviewLabel
 from fraud_eagle.likelihood import psi
 
 
-def test_psi():
+def test_psi() -> None:
     """Test for all possible input combinations.
     """
     for epsilon in (0.01, 0.1, 0.5):
-        assert psi(HONEST, GOOD, PLUS, epsilon) == 1 - epsilon
-        assert psi(HONEST, GOOD, MINUS, epsilon) == epsilon
-        assert psi(HONEST, BAD, PLUS, epsilon) == epsilon
-        assert psi(HONEST, BAD, MINUS, epsilon) == 1 - epsilon
+        assert psi(UserLabel.HONEST, ProductLabel.GOOD, ReviewLabel.PLUS, epsilon) == 1 - epsilon
+        assert psi(UserLabel.HONEST, ProductLabel.GOOD, ReviewLabel.MINUS, epsilon) == epsilon
+        assert psi(UserLabel.HONEST, ProductLabel.BAD, ReviewLabel.PLUS, epsilon) == epsilon
+        assert psi(UserLabel.HONEST, ProductLabel.BAD, ReviewLabel.MINUS, epsilon) == 1 - epsilon
 
-        assert psi(FRAUD, GOOD, PLUS, epsilon) == 2 * epsilon
-        assert psi(FRAUD, GOOD, MINUS, epsilon) == 1 - 2 * epsilon
-        assert psi(FRAUD, BAD, PLUS, epsilon) == 1 - 2 * epsilon
-        assert psi(FRAUD, BAD, MINUS, epsilon) == 2 * epsilon
+        assert psi(UserLabel.FRAUD, ProductLabel.GOOD, ReviewLabel.PLUS, epsilon) == 2 * epsilon
+        assert psi(UserLabel.FRAUD, ProductLabel.GOOD, ReviewLabel.MINUS, epsilon) == 1 - 2 * epsilon
+        assert psi(UserLabel.FRAUD, ProductLabel.BAD, ReviewLabel.PLUS, epsilon) == 1 - 2 * epsilon
+        assert psi(UserLabel.FRAUD, ProductLabel.BAD, ReviewLabel.MINUS, epsilon) == 2 * epsilon

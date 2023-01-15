@@ -21,19 +21,19 @@
 """
 import numpy as np
 
-from fraud_eagle.constants import HONEST, FRAUD, GOOD, BAD
+from fraud_eagle.labels import UserLabel, ProductLabel
 from fraud_eagle.prior import phi_u, phi_p
 
 
-def test_phi_u():
+def test_phi_u() -> None:
     """Test with possible inputs.
     """
-    assert phi_u(HONEST) == np.log(2)
-    assert phi_u(FRAUD) == np.log(2)
+    assert phi_u(UserLabel.HONEST) == np.log(2)
+    assert phi_u(UserLabel.FRAUD) == np.log(2)
 
 
-def test_phi_p():
+def test_phi_p() -> None:
     """Test with possible inputs.
     """
-    assert phi_p(GOOD) == np.log(2)
-    assert phi_p(BAD) == np.log(2)
+    assert phi_p(ProductLabel.GOOD) == np.log(2)
+    assert phi_p(ProductLabel.BAD) == np.log(2)

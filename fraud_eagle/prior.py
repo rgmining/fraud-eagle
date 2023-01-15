@@ -1,34 +1,35 @@
 #
-# prior.py
+#  prior.py
 #
-# Copyright (c) 2016-2017 Junpei Kawamoto
+#  Copyright (c) 2016-2023 Junpei Kawamoto
 #
-# This file is part of rgmining-fraud-eagle.
+#  This file is part of rgmining-fraud-eagle.
 #
-# rgmining-fraud-eagle is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+#  rgmining-fraud-eagle is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
 #
-# rgmining-fraud-eagle is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+#  rgmining-fraud-eagle is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
-#
+#  You should have received a copy of the GNU General Public License
+#  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
 """Define prior beliefs of users and products.
 """
-from __future__ import absolute_import
-import numpy as np
-from fraud_eagle.constants import HONEST, FRAUD, GOOD, BAD
+from typing import Final
 
-_LOG_2 = np.log(2.)
+import numpy as np
+
+from fraud_eagle.labels import UserLabel, ProductLabel
+
+_LOG_2: Final = float(np.log(2.))
 """Precomputed value, the logarithm of 2.0."""
 
 
-def phi_u(user):
+def phi_u(_u_label: UserLabel) -> float:
     """Logarithm of a prior belief of a user.
 
     The definition is
@@ -52,18 +53,16 @@ def phi_u(user):
     :math:`\\log(\\phi_{i}(u))` for any user :math:`u`.
 
     Args:
-      user: User object.
+      _u_label: User label.
 
     Returns:
       The logarithm of the prior belief of the label of the given user.
       However, it returns :math:`\\log 2` whatever the given user is.
     """
-    if user in (HONEST, FRAUD):
-        return _LOG_2
-    raise ValueError("Invalid user label:", user)
+    return _LOG_2
 
 
-def phi_p(product):
+def phi_p(_p_label: ProductLabel) -> float:
     """Logarithm of a prior belief of a product.
 
     The definition is
@@ -87,12 +86,10 @@ def phi_p(product):
     :math:`\\log(\\phi_{j}(p))` for any product :math:`p`.
 
     Args:
-      user: Product object.
+      _p_label: Product label.
 
     Returns:
       The logarithm of the prior belief of the label of the given product.
       However, it returns :math:`\\log 2` whatever the given product is.
     """
-    if product in (GOOD, BAD):
-        return _LOG_2
-    raise ValueError("Invalid product label:", product)
+    return _LOG_2

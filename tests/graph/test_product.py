@@ -25,10 +25,10 @@ import numpy as np
 from numpy.testing import assert_almost_equal
 
 from fraud_eagle import ReviewGraph
-from fraud_eagle.constants import GOOD, BAD
+from fraud_eagle.labels import ProductLabel
 
 
-def test_summary():
+def test_summary() -> None:
     """Test summary property.
 
     In this test, we assume the following review graph,
@@ -61,12 +61,12 @@ def test_summary():
         1: graph.add_review(reviewers[1], product, 0),
         2: graph.add_review(reviewers[2], product, 1),
     })
-    reviews[0].update_user_to_product(GOOD, np.log(0.3))
-    reviews[0].update_user_to_product(BAD, np.log(0.7))
-    reviews[1].update_user_to_product(GOOD, np.log(0.6))
-    reviews[1].update_user_to_product(BAD, np.log(0.4))
-    reviews[2].update_user_to_product(GOOD, np.log(0.8))
-    reviews[2].update_user_to_product(BAD, np.log(0.2))
+    reviews[0].update_user_to_product(ProductLabel.GOOD, np.log(0.3))
+    reviews[0].update_user_to_product(ProductLabel.BAD, np.log(0.7))
+    reviews[1].update_user_to_product(ProductLabel.GOOD, np.log(0.6))
+    reviews[1].update_user_to_product(ProductLabel.BAD, np.log(0.4))
+    reviews[2].update_user_to_product(ProductLabel.GOOD, np.log(0.8))
+    reviews[2].update_user_to_product(ProductLabel.BAD, np.log(0.2))
 
     ratings = [review.rating for review in reviews.values()]
     weights = [1 - r.anomalous_score for r in reviewers]

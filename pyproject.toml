@@ -36,10 +36,25 @@ rgmining-common = "^0.9.1"
 bump2version = "^1.0.1"
 pytest = "^7.2.0"
 pytest-cov = "^4.0.0"
+mypy = "^0.991"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+files = "fraud_eagle/*.py,tests/**/*.py"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = "networkx"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "common"
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 addopts = "--cov=fraud_eagle --cov-branch --cov-report=term-missing --cov-report=xml"
