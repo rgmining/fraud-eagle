@@ -22,13 +22,12 @@
 import numpy as np
 from numpy.testing import assert_almost_equal
 
-from fraud_eagle.labels import ReviewLabel, ProductLabel, UserLabel
 from fraud_eagle.graph import Review
+from fraud_eagle.labels import ProductLabel, ReviewLabel, UserLabel
 
 
 def test_evaluation() -> None:
-    """Test evaluation returns collect labels.
-    """
+    """Test evaluation returns collect labels."""
     r1 = Review(0.2)
     assert r1.evaluation == ReviewLabel.MINUS
 
@@ -37,8 +36,7 @@ def test_evaluation() -> None:
 
 
 def test_update_user_to_product() -> None:
-    """Test updating user-to-product message.
-    """
+    """Test updating user-to-product message."""
     r = Review(1)
     assert_almost_equal(r.user_to_product(ProductLabel.GOOD), np.log(0.5))
     assert_almost_equal(r.user_to_product(ProductLabel.BAD), np.log(0.5))
@@ -49,8 +47,7 @@ def test_update_user_to_product() -> None:
 
 
 def test_update_product_to_user() -> None:
-    """Test updating product-to-user message.
-    """
+    """Test updating product-to-user message."""
     r = Review(1)
     assert_almost_equal(r.product_to_user(UserLabel.HONEST), np.log(0.5))
     assert_almost_equal(r.product_to_user(UserLabel.FRAUD), np.log(0.5))

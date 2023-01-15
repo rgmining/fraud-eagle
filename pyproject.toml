@@ -37,6 +37,10 @@ bump2version = "^1.0.1"
 pytest = "^7.2.0"
 pytest-cov = "^4.0.0"
 mypy = "^0.991"
+tox = "^4.2.8"
+isort = "^5.11.4"
+black = "^22.12.0"
+flake8 = "^6.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -55,6 +59,15 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "common"
 ignore_missing_imports = true
+
+[tool.black]
+target-version = ['py39']
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+src_paths = ["fraud_eagle", "tests"]
 
 [tool.pytest.ini_options]
 addopts = "--cov=fraud_eagle --cov-branch --cov-report=term-missing --cov-report=xml"

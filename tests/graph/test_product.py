@@ -51,16 +51,16 @@ def test_summary() -> None:
     """
     epsilon = 0.2
     graph = ReviewGraph(epsilon)
-    reviewers = [
-        graph.new_reviewer(f"reviewer-{i}") for i in range(3)
-    ]
+    reviewers = [graph.new_reviewer(f"reviewer-{i}") for i in range(3)]
     product = graph.new_product("product-0")
 
-    reviews = OrderedDict({
-        0: graph.add_review(reviewers[0], product, 1),
-        1: graph.add_review(reviewers[1], product, 0),
-        2: graph.add_review(reviewers[2], product, 1),
-    })
+    reviews = OrderedDict(
+        {
+            0: graph.add_review(reviewers[0], product, 1),
+            1: graph.add_review(reviewers[1], product, 0),
+            2: graph.add_review(reviewers[2], product, 1),
+        }
+    )
     reviews[0].update_user_to_product(ProductLabel.GOOD, np.log(0.3))
     reviews[0].update_user_to_product(ProductLabel.BAD, np.log(0.7))
     reviews[1].update_user_to_product(ProductLabel.GOOD, np.log(0.6))

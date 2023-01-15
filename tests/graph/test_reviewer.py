@@ -61,13 +61,11 @@ def test_anomalous_score() -> None:
     epsilon = 0.2
     graph = ReviewGraph(epsilon)
     reviewer = graph.new_reviewer("reviewer-0")
-    products = [
-        graph.new_product(f"product-{i}") for i in range(3)
-    ]
+    products = [graph.new_product(f"product-{i}") for i in range(3)]
     reviews = {
         0: graph.add_review(reviewer, products[0], 1),
         1: graph.add_review(reviewer, products[1], 0),
-        2: graph.add_review(reviewer, products[2], 1)
+        2: graph.add_review(reviewer, products[2], 1),
     }
     reviews[0].update_product_to_user(UserLabel.HONEST, np.log(0.3))
     reviews[0].update_product_to_user(UserLabel.FRAUD, np.log(0.7))

@@ -25,8 +25,8 @@ import numpy as np
 import pytest
 from numpy.testing import assert_almost_equal
 
-from fraud_eagle.labels import UserLabel, ProductLabel, ReviewLabel
 from fraud_eagle.graph import ReviewGraph
+from fraud_eagle.labels import ProductLabel, ReviewLabel, UserLabel
 from fraud_eagle.likelihood import psi
 
 EPSILON = 0.1
@@ -66,9 +66,7 @@ def test_prod_message_from_users(review_graph: ReviewGraph) -> None:
     of reviewers who review the given product except the given reviewer,
     :math:`y_{j}` is a product label and one of the {GOOD, BAD}.
     """
-    reviewers = [
-        review_graph.new_reviewer("reviewer-{0}".format(i)) for i in range(3)
-    ]
+    reviewers = [review_graph.new_reviewer("reviewer-{0}".format(i)) for i in range(3)]
     product = review_graph.new_product("product-0")
     reviews = {
         0: review_graph.add_review(reviewers[0], product, random.random()),
@@ -83,11 +81,11 @@ def test_prod_message_from_users(review_graph: ReviewGraph) -> None:
     reviews[2].update_user_to_product(ProductLabel.BAD, np.log(0.2))
 
     assert_almost_equal(
-        np.exp(review_graph.prod_message_from_users(reviewers[0], product, ProductLabel.GOOD)),
-        0.6 * 0.8)
+        np.exp(review_graph.prod_message_from_users(reviewers[0], product, ProductLabel.GOOD)), 0.6 * 0.8
+    )
     assert_almost_equal(
-        np.exp(review_graph.prod_message_from_users(reviewers[1], product, ProductLabel.BAD)),
-        0.6 * 0.2)
+        np.exp(review_graph.prod_message_from_users(reviewers[1], product, ProductLabel.BAD)), 0.6 * 0.2
+    )
 
     # Test for giving None as the reviewer, which means considering all
     # reviewers.
@@ -125,9 +123,7 @@ def test_prod_message_from_products(review_graph: ReviewGraph) -> None:
     :math:`y_{i}` is a user label and one of the {HONEST, FRAUD}.
     """
     reviewer = review_graph.new_reviewer("reviewer-0")
-    products = [
-        review_graph.new_product("product-{0}".format(i)) for i in range(3)
-    ]
+    products = [review_graph.new_product("product-{0}".format(i)) for i in range(3)]
     reviews = {
         0: review_graph.add_review(reviewer, products[0], random.random()),
         1: review_graph.add_review(reviewer, products[1], random.random()),
@@ -141,20 +137,20 @@ def test_prod_message_from_products(review_graph: ReviewGraph) -> None:
     reviews[2].update_product_to_user(UserLabel.FRAUD, np.log(0.2))
 
     assert_almost_equal(
-        np.exp(review_graph.prod_message_from_products(reviewer, products[0], UserLabel.HONEST)),
-        0.6 * 0.8)
+        np.exp(review_graph.prod_message_from_products(reviewer, products[0], UserLabel.HONEST)), 0.6 * 0.8
+    )
     assert_almost_equal(
-        np.exp(review_graph.prod_message_from_products(reviewer, products[1], UserLabel.FRAUD)),
-        0.6 * 0.2)
+        np.exp(review_graph.prod_message_from_products(reviewer, products[1], UserLabel.FRAUD)), 0.6 * 0.2
+    )
 
     # Test for giving None as the product, which means considering all
     # products.
     assert_almost_equal(
-        np.exp(review_graph.prod_message_from_products(reviewer, None, UserLabel.HONEST)),
-        0.4 * 0.6 * 0.8)
+        np.exp(review_graph.prod_message_from_products(reviewer, None, UserLabel.HONEST)), 0.4 * 0.6 * 0.8
+    )
     assert_almost_equal(
-        np.exp(review_graph.prod_message_from_products(reviewer, None, UserLabel.FRAUD)),
-        0.6 * 0.4 * 0.2)
+        np.exp(review_graph.prod_message_from_products(reviewer, None, UserLabel.FRAUD)), 0.6 * 0.4 * 0.2
+    )
 
 
 def test_update_user_to_product(review_graph: ReviewGraph) -> None:
@@ -190,9 +186,7 @@ def test_update_user_to_product(review_graph: ReviewGraph) -> None:
     the user :math:`u` reviews but except product :math:`p`.
     """
     reviewer = review_graph.new_reviewer("reviewer-0")
-    products = [
-        review_graph.new_product("product-{0}".format(i)) for i in range(3)
-    ]
+    products = [review_graph.new_product("product-{0}".format(i)) for i in range(3)]
     reviews = {
         0: review_graph.add_review(reviewer, products[0], 1),
         1: review_graph.add_review(reviewer, products[1], 0),
@@ -210,20 +204,32 @@ def test_update_user_to_product(review_graph: ReviewGraph) -> None:
     # 0.6*0.8: products of other messages to the reviewer with HONEST.
     # 2.0: phi of the label (constant)
     # 0.4*0.2: products of other messages to the reviewer with FRAUD.
-    ans1 = 0.6 * 0.8 * 2.0 * psi(UserLabel.HONEST, ProductLabel.GOOD, ReviewLabel.PLUS, EPSILON) \
-           + 0.4 * 0.2 * 2.0 * psi(UserLabel.FRAUD, ProductLabel.GOOD, ReviewLabel.PLUS, EPSILON)
-    assert_almost_equal(np.exp(
-        review_graph._update_user_to_product(  # pylint: disable=protected-access
-            reviewer, products[0], ProductLabel.GOOD)), ans1)
+    ans1 = 0.6 * 0.8 * 2.0 * psi(
+        UserLabel.HONEST, ProductLabel.GOOD, ReviewLabel.PLUS, EPSILON
+    ) + 0.4 * 0.2 * 2.0 * psi(UserLabel.FRAUD, ProductLabel.GOOD, ReviewLabel.PLUS, EPSILON)
+    assert_almost_equal(
+        np.exp(
+            review_graph._update_user_to_product(  # pylint: disable=protected-access
+                reviewer, products[0], ProductLabel.GOOD
+            )
+        ),
+        ans1,
+    )
 
     # 0.6*0.8: products of other messages to the reviewer with HONEST.
     # 2.0: phi of the label (constant)
     # 0.4*0.2: products of other messages to the reviewer with FRAUD.
-    ans2 = 0.6 * 0.8 * 2.0 * psi(UserLabel.HONEST, ProductLabel.BAD, ReviewLabel.PLUS, EPSILON) \
-           + 0.4 * 0.2 * 2.0 * psi(UserLabel.FRAUD, ProductLabel.BAD, ReviewLabel.PLUS, EPSILON)
-    assert_almost_equal(np.exp(
-        review_graph._update_user_to_product(  # pylint: disable=protected-access
-            reviewer, products[0], ProductLabel.BAD)), ans2)
+    ans2 = 0.6 * 0.8 * 2.0 * psi(UserLabel.HONEST, ProductLabel.BAD, ReviewLabel.PLUS, EPSILON) + 0.4 * 0.2 * 2.0 * psi(
+        UserLabel.FRAUD, ProductLabel.BAD, ReviewLabel.PLUS, EPSILON
+    )
+    assert_almost_equal(
+        np.exp(
+            review_graph._update_user_to_product(  # pylint: disable=protected-access
+                reviewer, products[0], ProductLabel.BAD
+            )
+        ),
+        ans2,
+    )
 
 
 def test_update_product_to_user(review_graph: ReviewGraph) -> None:
@@ -258,9 +264,7 @@ def test_update_product_to_user(review_graph: ReviewGraph) -> None:
     :math:`\\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/u` means a set of users
     who review the product :math:`p` but except user :math:`u`,
     """
-    reviewers = [
-        review_graph.new_reviewer("reviewer-{0}".format(i)) for i in range(3)
-    ]
+    reviewers = [review_graph.new_reviewer("reviewer-{0}".format(i)) for i in range(3)]
     product = review_graph.new_product("product-0")
     reviews = {
         0: review_graph.add_review(reviewers[0], product, 1),
@@ -279,17 +283,29 @@ def test_update_product_to_user(review_graph: ReviewGraph) -> None:
     # 0.6*0.8: products of other messages to the product with GOOD.
     # 2.0: phi of the label (constant)
     # 0.4*0.2: products of other messages to the product with BAD.
-    ans1 = 0.6 * 0.8 * 2.0 * psi(UserLabel.HONEST, ProductLabel.GOOD, ReviewLabel.PLUS, EPSILON) \
-           + 0.4 * 0.2 * 2.0 * psi(UserLabel.HONEST, ProductLabel.BAD, ReviewLabel.PLUS, EPSILON)
-    assert_almost_equal(np.exp(
-        review_graph._update_product_to_user(  # pylint: disable=protected-access
-            reviewers[0], product, UserLabel.HONEST)), ans1)
+    ans1 = 0.6 * 0.8 * 2.0 * psi(
+        UserLabel.HONEST, ProductLabel.GOOD, ReviewLabel.PLUS, EPSILON
+    ) + 0.4 * 0.2 * 2.0 * psi(UserLabel.HONEST, ProductLabel.BAD, ReviewLabel.PLUS, EPSILON)
+    assert_almost_equal(
+        np.exp(
+            review_graph._update_product_to_user(  # pylint: disable=protected-access
+                reviewers[0], product, UserLabel.HONEST
+            )
+        ),
+        ans1,
+    )
 
     # 0.6*0.8: products of other messages to the product with GOOD.
     # 2.0: phi of the label (constant)
     # 0.4*0.2: products of other messages to the product with BAD.
-    ans2 = 0.6 * 0.8 * 2.0 * psi(UserLabel.FRAUD, ProductLabel.GOOD, ReviewLabel.PLUS, EPSILON) \
-           + 0.4 * 0.2 * 2.0 * psi(UserLabel.FRAUD, ProductLabel.BAD, ReviewLabel.PLUS, EPSILON)
-    assert_almost_equal(np.exp(
-        review_graph._update_product_to_user(  # pylint: disable=protected-access
-            reviewers[0], product, UserLabel.FRAUD)), ans2)
+    ans2 = 0.6 * 0.8 * 2.0 * psi(UserLabel.FRAUD, ProductLabel.GOOD, ReviewLabel.PLUS, EPSILON) + 0.4 * 0.2 * 2.0 * psi(
+        UserLabel.FRAUD, ProductLabel.BAD, ReviewLabel.PLUS, EPSILON
+    )
+    assert_almost_equal(
+        np.exp(
+            review_graph._update_product_to_user(  # pylint: disable=protected-access
+                reviewers[0], product, UserLabel.FRAUD
+            )
+        ),
+        ans2,
+    )

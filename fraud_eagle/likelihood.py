@@ -22,7 +22,7 @@
 This module defines a likelihood of a pair of user and product.
 See :meth:`psi` for the detailed definition of the likelihood.
 """
-from fraud_eagle.labels import ReviewLabel, ProductLabel, UserLabel
+from fraud_eagle.labels import ProductLabel, ReviewLabel, UserLabel
 
 
 # pylint: disable=too-many-branches

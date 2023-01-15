@@ -23,9 +23,9 @@ from typing import Final
 
 import numpy as np
 
-from fraud_eagle.labels import UserLabel, ProductLabel
+from fraud_eagle.labels import ProductLabel, UserLabel
 
-_LOG_2: Final = float(np.log(2.))
+_LOG_2: Final = float(np.log(2.0))
 """Precomputed value, the logarithm of 2.0."""
 
 
