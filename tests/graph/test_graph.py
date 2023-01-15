@@ -93,6 +93,26 @@ def test_prod_message_from_users(review_graph: ReviewGraph) -> None:
     assert_almost_equal(np.exp(review_graph.prod_message_from_users(None, product, ProductLabel.BAD)), 0.6 * 0.4 * 0.2)
 
 
+def test_prod_message_from_users_update(review_graph: ReviewGraph) -> None:
+    reviewers = [review_graph.new_reviewer(f"reviewer-{i}") for i in range(3)]
+    products = [review_graph.new_product(f"product-{i}") for i in range(10)]
+    reviews = [review_graph.add_review(r, products[0], random.random()) for r in reviewers]
+    for p in products[1:]:
+        for r in reviewers:
+            review_graph.add_review(r, p, random.random())
+
+    assert_almost_equal(
+        review_graph.prod_message_from_users(reviewers[0], products[0], ProductLabel.GOOD),
+        sum(r.user_to_product(ProductLabel.GOOD) for r in reviews[1:]))
+
+    for _ in range(10):
+        review_graph.update()
+
+    assert_almost_equal(
+        review_graph.prod_message_from_users(reviewers[0], products[0], ProductLabel.GOOD),
+        sum(r.user_to_product(ProductLabel.GOOD) for r in reviews[1:]))
+
+
 def test_prod_message_from_products(review_graph: ReviewGraph) -> None:
     """Test prod_message_from_products method.
 
@@ -151,6 +171,26 @@ def test_prod_message_from_products(review_graph: ReviewGraph) -> None:
     assert_almost_equal(
         np.exp(review_graph.prod_message_from_products(reviewer, None, UserLabel.FRAUD)), 0.6 * 0.4 * 0.2
     )
+
+
+def test_prod_message_from_products_update(review_graph: ReviewGraph) -> None:
+    reviewers = [review_graph.new_reviewer(f"reviewer-{i}") for i in range(10)]
+    products = [review_graph.new_product(f"product-{i}") for i in range(3)]
+    reviews = [review_graph.add_review(reviewers[0], p, random.random()) for p in products]
+    for r in reviewers[1:]:
+        for p in products:
+            review_graph.add_review(r, p, random.random())
+
+    assert_almost_equal(
+        review_graph.prod_message_from_products(reviewers[0], products[0], UserLabel.HONEST),
+        sum(r.product_to_user(UserLabel.HONEST) for r in reviews[1:]))
+
+    for _ in range(10):
+        review_graph.update()
+
+    assert_almost_equal(
+        review_graph.prod_message_from_products(reviewers[0], products[0], UserLabel.HONEST),
+        sum(r.product_to_user(UserLabel.HONEST) for r in reviews[1:]))
 
 
 def test_update_user_to_product(review_graph: ReviewGraph) -> None:
