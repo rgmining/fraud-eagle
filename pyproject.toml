@@ -30,7 +30,6 @@ include = ["COPYING"]
 python = "^3.9"
 numpy = "^1.24.1"
 networkx = "^3.0"
-rgmining-common = "^0.9.1"
 
 [tool.poetry.group.dev.dependencies]
 bump2version = "^1.0.1"
@@ -55,10 +54,6 @@ disallow_untyped_defs = true
 
 [[tool.mypy.overrides]]
 module = "networkx"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "common"
 ignore_missing_imports = true
 
 [tool.black]

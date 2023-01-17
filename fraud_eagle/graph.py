@@ -19,12 +19,12 @@
 #  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
 """Provide a bipartite graph class implementing Fraud Eagle algorithm.
 """
+from functools import lru_cache
 from logging import getLogger
 from typing import Any, Final, Optional, cast
 
 import networkx as nx
 import numpy as np
-from common import memoized
 
 from fraud_eagle.labels import ProductLabel, ReviewLabel, UserLabel
 from fraud_eagle.likelihood import psi
@@ -328,7 +328,7 @@ class ReviewGraph:
         self.graph.add_edge(reviewer, product, review=review)
         return review
 
-    @memoized
+    @lru_cache
     def retrieve_reviewers(self, product: Product) -> list[Reviewer]:
         """Retrieve reviewers review a given product.
 
@@ -340,7 +340,7 @@ class ReviewGraph:
         """
         return list(self.graph.predecessors(product))
 
-    @memoized
+    @lru_cache
     def retrieve_products(self, reviewer: Reviewer) -> list[Product]:
         """Retrieve products a given reviewer reviews.
 
@@ -352,7 +352,7 @@ class ReviewGraph:
         """
         return list(self.graph.successors(reviewer))
 
-    @memoized
+    @lru_cache
     def retrieve_review(self, reviewer: Reviewer, product: Product) -> Review:
         """Retrieve a review a given reviewer posts to a given product.
 
@@ -450,6 +450,10 @@ class ReviewGraph:
             + "\n".join("  {0}-{1}: {2}".format(edges[i], edges[i + 1], v) for i, v in enumerate(histo))
         )
 
+        # Clear memoized values since messages are updated.
+        self.prod_message_from_all_users.cache_clear()
+        self.prod_message_from_all_products.cache_clear()
+
         return max(diffs)
 
     def _update_user_to_product(self, reviewer: Reviewer, product: Product, p_label: ProductLabel) -> float:
@@ -530,7 +534,7 @@ class ReviewGraph:
             )
         return _logaddexp(*res.values())
 
-    @memoized
+    @lru_cache
     def prod_message_from_all_users(self, product: Product, p_label: ProductLabel) -> float:
         """Compute a product of messages to a product.
 
@@ -581,13 +585,13 @@ class ReviewGraph:
         Returns:
           a logarithm of the product defined above.
         """
-        sum_all: float = self.prod_message_from_all_users(product, p_label)
+        sum_all = self.prod_message_from_all_users(product, p_label)
         sum_reviewer = 0.0
         if reviewer is not None:
             sum_reviewer = self.retrieve_review(reviewer, product).user_to_product(p_label)
         return sum_all - sum_reviewer
 
-    @memoized
+    @lru_cache
     def prod_message_from_all_products(self, reviewer: Reviewer, u_label: UserLabel) -> float:
         """Compute a product of messages sending to a reviewer.
 
@@ -638,7 +642,7 @@ class ReviewGraph:
         Returns:
           a logarithm of the product defined above.
         """
-        sum_all: float = self.prod_message_from_all_products(reviewer, u_label)
+        sum_all = self.prod_message_from_all_products(reviewer, u_label)
         sum_product = 0.0
         if product is not None:
             sum_product = self.retrieve_review(reviewer, product).product_to_user(u_label)

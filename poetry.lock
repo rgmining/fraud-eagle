@@ -662,26 +662,15 @@ files = [
 ]
 
 [[package]]
-name = "rgmining-common"
-version = "0.9.1"
-description = "Common library for Review graph mining project"
-category = "main"
-optional = false
-python-versions = "*"
-files = [
-    {file = "rgmining-common-0.9.1.tar.gz", hash = "sha256:2098f69d3bcee45197126d1b6ef9512d7729446d6dc39b9f186cddf2450f9c7e"},
-]
-
-[[package]]
 name = "setuptools"
-version = "65.7.0"
+version = "66.0.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "setuptools-65.7.0-py3-none-any.whl", hash = "sha256:8ab4f1dbf2b4a65f7eec5ad0c620e84c34111a68d3349833494b9088212214dd"},
-    {file = "setuptools-65.7.0.tar.gz", hash = "sha256:4d3c92fac8f1118bb77a22181355e29c239cabfe2b9effdaa665c66b711136d7"},
+    {file = "setuptools-66.0.0-py3-none-any.whl", hash = "sha256:a78d01d1e2c175c474884671dde039962c9d74c7223db7369771fcf6e29ceeab"},
+    {file = "setuptools-66.0.0.tar.gz", hash = "sha256:bd6eb2d6722568de6d14b87c44a96fac54b2a45ff5e940e639979a3d1792adb6"},
 ]
 
 [package.extras]
@@ -703,14 +692,14 @@ files = [
 
 [[package]]
 name = "tox"
-version = "4.2.8"
+version = "4.3.3"
 description = "tox is a generic virtualenv management and test command line tool"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "tox-4.2.8-py3-none-any.whl", hash = "sha256:e9d5006a533d280e2ca26e3ca61052ffa55a65b683486f92d12563a14a9b7a4f"},
-    {file = "tox-4.2.8.tar.gz", hash = "sha256:7c31940d755355210151e8bef23feab3d714a8a4795e513c454ff0baccd995b1"},
+    {file = "tox-4.3.3-py3-none-any.whl", hash = "sha256:9bb952285333da6ce5066f935e815ca8c11da6b67a6b732235be8213fbd10efb"},
+    {file = "tox-4.3.3.tar.gz", hash = "sha256:81a13521b3e32b30db4dafb746a34ccd39f78ad393c83760adb67b011b3ef96f"},
 ]
 
 [package.dependencies]
@@ -765,4 +754,4 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "d0b48eeae384a572fd479f2a35ae87869173278b68c046bebd901ecde549cbab"
+content-hash = "79d38b06cc4b509c0c2ce595c0cee9192a3d40d171e0910b5f9d6221588aeab9"
