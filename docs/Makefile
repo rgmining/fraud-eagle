@@ -3,7 +3,8 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
+SPHINXBUILD   = poetry run sphinx-build
+SPHINXAPIDOC  = poetry run sphinx-apidoc
 PAPER         =
 BUILDDIR      = build
 
@@ -51,12 +52,7 @@ clean:
 
 .PHONY: sphinx-apidoc
 sphinx-apidoc:
-	sphinx-apidoc -f -o source/modules -M "../fraud_eagle/"
-	rm source/modules/modules.rst
-
-.PHONY: sphinx-apidoc-test
-sphinx-apidoc-test:
-	sphinx-apidoc -f -o source/modules -M "../tests/"
+	$(SPHINXAPIDOC) -f -o source/modules -M "../fraud_eagle/"
 	rm source/modules/modules.rst
 
 .PHONY: html

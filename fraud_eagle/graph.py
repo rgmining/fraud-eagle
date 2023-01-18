@@ -30,7 +30,7 @@ from fraud_eagle.labels import ProductLabel, ReviewLabel, UserLabel
 from fraud_eagle.likelihood import psi
 from fraud_eagle.prior import phi_p, phi_u
 
-LOGGER: Final = getLogger(__name__)
+_LOGGER: Final = getLogger(__name__)
 """Logging object."""
 
 _LOG_POINT_5: Final = float(np.log(0.5))
@@ -92,6 +92,10 @@ class Reviewer(Node):
     :math:`b(honest) + b(fraud) = 1`.
 
     Thus, we use :math:`b(fraud)` as the anomalous score.
+
+    Args:
+      graph: reference of the parent graph.
+      name: name of this node.
     """
 
     __slots__ = ()
@@ -120,6 +124,9 @@ class Product(Node):
     .. math::
         \\frac{\\sum_{i}a_{i}r_{i}}{\\sum_{i}a_{i}}
 
+    Args:
+      graph: reference of the parent graph.
+      name: name of this node.
     """
 
     __slots__ = ()
@@ -445,7 +452,7 @@ class ReviewGraph:
                     review.update_product_to_user(u_label, updated)
 
         histo, edges = np.histogram(diffs)
-        LOGGER.info(
+        _LOGGER.info(
             "Differentials:\n"
             + "\n".join("  {0}-{1}: {2}".format(edges[i], edges[i + 1], v) for i, v in enumerate(histo))
         )
