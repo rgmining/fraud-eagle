@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rgmining-fraud-eagle"
-version = "0.9.7"
+version = "0.10.0"
 description = "An implementation of Fraud Eagle algorithm"
 license = "GPL-3.0-only"
 authors = ["Junpei Kawamoto <kawamoto.junpei@gmail.com>"]
