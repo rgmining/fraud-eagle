@@ -38,7 +38,7 @@ for more detail.
    :target: https://codeclimate.com/github/rgmining/fraud-eagle/maintainability
 .. |Test Coverage| image:: https://api.codeclimate.com/v1/badges/cf5f0ee2f7f5aa6bd846/test_coverage
    :target: https://codeclimate.com/github/rgmining/fraud-eagle/test_coverage
-.. |Release| image:: https://img.shields.io/badge/release-0.10.1-brightgreen.svg
+.. |Release| image:: https://img.shields.io/badge/release-0.10.2-brightgreen.svg
    :target: https://pypi.org/project/rgmining-fraud-eagle/
 .. |Japanese| image:: https://img.shields.io/badge/qiita-%E6%97%A5%E6%9C%AC%E8%AA%9E-brightgreen.svg
    :target: http://qiita.com/jkawamoto/items/d2284316cc37cd810bfd
