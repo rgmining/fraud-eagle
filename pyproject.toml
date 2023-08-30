@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rgmining-fraud-eagle"
-version = "0.10.2"
+version = "0.10.3"
 description = "An implementation of Fraud Eagle algorithm"
 license = "GPL-3.0-only"
 authors = ["Junpei Kawamoto <kawamoto.junpei@gmail.com>"]
@@ -28,7 +28,7 @@ include = ["COPYING"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-numpy = "^1.25.1"
+numpy = "^1.25.2"
 networkx = "^3.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -36,10 +36,10 @@ bump2version = "^1.0.1"
 pytest = "^7.4.0"
 pytest-cov = "^4.0.0"
 mypy = "^0.991"
-tox = "^4.6.4"
+tox = "^4.11.0"
 isort = "^5.11.4"
 black = "^22.12.0"
-flake8 = "^6.0.0"
+flake8 = "^6.1.0"
 pre-commit = "^2.21.0"
 
 [tool.poetry.group.docs]
@@ -47,7 +47,7 @@ optional = true
 
 [tool.poetry.group.docs.dependencies]
 sphinx = "^5.3.0"
-sphinx-rtd-theme = "^1.2.2"
+sphinx-rtd-theme = "^1.3.0"
 sphinx-autobuild = "^2021.3.14"
 
 [build-system]
