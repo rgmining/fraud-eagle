@@ -18,6 +18,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries",
     "Topic :: Scientific/Engineering :: Information Analysis"
 ]
@@ -27,8 +28,8 @@ packages = [
 include = ["COPYING"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-numpy = "^1.25.2"
+python = "<3.13,>=3.9"
+numpy = "^1.26.1"
 networkx = "^3.0"
 
 [tool.poetry.group.dev.dependencies]
