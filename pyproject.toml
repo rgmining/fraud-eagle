@@ -1,35 +1,47 @@
-[tool.poetry]
+[build-system]
+build-backend = "poetry.core.masonry.api"
+
+requires = [ "poetry-core>=2" ]
+
+[project]
 name = "rgmining-fraud-eagle"
 version = "0.10.3"
 description = "An implementation of Fraud Eagle algorithm"
-license = "GPL-3.0-only"
-authors = ["Junpei Kawamoto <kawamoto.junpei@gmail.com>"]
 readme = "README.rst"
-homepage = "https://rgmining.github.io/frad-eagle/"
-repository = "https://github.com/rgmining/frad-eagle"
-documentation = "https://rgmining.github.io/frad-eagle/"
-keywords = ["review", "graph", "mining", "algorithm", "icwsm", "fraud-eagle"]
+keywords = [ "algorithm", "fraud-eagle", "graph", "icwsm", "mining", "review" ]
+license = "GPL-3.0-only"
+authors = [
+  { name = "Junpei Kawamoto", email = "kawamoto.junpei@gmail.com" },
+]
+requires-python = ">=3.11"
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-    "Natural Language :: English",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Software Development :: Libraries",
-    "Topic :: Scientific/Engineering :: Information Analysis"
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Natural Language :: English",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+  "Topic :: Software Development :: Libraries",
 ]
-packages = [
-    { include = "fraud_eagle" },
-]
-include = ["COPYING"]
 
-[tool.poetry.dependencies]
-python = "<3.13,>=3.10"
-numpy = "^1.26.1"
-networkx = "^3.3.0"
+dependencies = [
+  "networkx>=3.2.1",
+  "numpy>=2.2",
+]
+
+urls.documentation = "https://rgmining.github.io/frad-eagle/"
+urls.homepage = "https://rgmining.github.io/frad-eagle/"
+urls.repository = "https://github.com/rgmining/frad-eagle"
+
+[tool.poetry]
+packages = [
+  { include = "fraud_eagle" },
+]
+include = [ "COPYING" ]
 
 [tool.poetry.group.dev.dependencies]
 bump2version = "^1.0.1"
@@ -50,9 +62,17 @@ sphinx = "^7.2.6"
 sphinx-rtd-theme = "^2.0.0"
 sphinx-autobuild = "^2024.2.4"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.black]
+target-version = [ 'py310' ]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+src_paths = [ "fraud_eagle", "tests" ]
+
+[tool.pytest.ini_options]
+addopts = "--cov=fraud_eagle --cov-branch --cov-report=term-missing --cov-report=xml"
 
 [tool.mypy]
 files = "fraud_eagle/*.py,tests/**/*.py"
@@ -63,15 +83,3 @@ disallow_untyped_defs = true
 [[tool.mypy.overrides]]
 module = "networkx"
 ignore_missing_imports = true
-
-[tool.black]
-target-version = ['py310']
-line-length = 120
-
-[tool.isort]
-profile = "black"
-line_length = 120
-src_paths = ["fraud_eagle", "tests"]
-
-[tool.pytest.ini_options]
-addopts = "--cov=fraud_eagle --cov-branch --cov-report=term-missing --cov-report=xml"
