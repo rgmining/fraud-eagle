@@ -52,7 +52,8 @@ tox = "^4.11.0"
 isort = "^5.11.4"
 black = "^24.3.0"
 flake8 = "^7.0.0"
-pre-commit = "^3.7.0"
+pre-commit = "^4.1"
+pre-commit-uv = "^4.1.4"
 
 [tool.poetry.group.docs]
 optional = true
