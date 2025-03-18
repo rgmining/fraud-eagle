@@ -27,15 +27,11 @@ repos:
       - id: mypy
         args: []
         additional_dependencies: ["numpy>=2.2", "pytest>=8.1.1", "types-networkx>=3.4.2.20250312"]
-  - repo: https://github.com/tox-dev/tox-ini-fmt
-    rev: "1.5.0"
-    hooks:
-      - id: tox-ini-fmt
   - repo: local
     hooks:
-      - id: tox
-        name: run tox
-        entry: poetry run tox
-        language: python
-        files: .py$
+      - id: pytest
+        name: Run pytest
+        entry: poetry run pytest
+        language: system
         pass_filenames: false
+        always_run: true
