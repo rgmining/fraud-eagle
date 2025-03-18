@@ -1,7 +1,7 @@
 #
 #  __init__.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraud-eagle.
 #
@@ -24,6 +24,7 @@ This algorithm has been introduced by Leman Akoglu, *et al.* in `ICWSM 2013`_.
 .. _ICWSM 2013: https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338
 
 """
+
 from typing import Final
 
 from fraud_eagle.graph import ReviewGraph

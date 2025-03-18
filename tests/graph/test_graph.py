@@ -1,7 +1,7 @@
 #
 #  test_graph.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraud-eagle.
 #
@@ -17,8 +17,8 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
-"""Tests for graph module in fraud_eagle package.
-"""
+"""Tests for graph module in fraud_eagle package."""
+
 import random
 
 import numpy as np

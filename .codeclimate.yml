@@ -7,9 +7,9 @@ engines:
     enabled: true
     config:
       languages:
-      - python
+        - python
 ratings:
   paths:
     - "**.py"
 exclude_paths:
-- tests/
+  - tests/

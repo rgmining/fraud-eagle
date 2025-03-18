@@ -1,7 +1,7 @@
 #
 #  test_reviewer.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraud-eagle.
 #
@@ -17,8 +17,8 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with rgmining-fraud-eagle. If not, see <http://www.gnu.org/licenses/>.
-"""Tests for Reviewer class.
-"""
+"""Tests for Reviewer class."""
+
 import numpy as np
 from numpy.testing import assert_almost_equal
 
