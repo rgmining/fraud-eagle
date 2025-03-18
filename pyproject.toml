@@ -49,11 +49,9 @@ pytest = "^8.1.1"
 pytest-cov = "^5.0.0"
 mypy = "^1.9.0"
 tox = "^4.11.0"
-isort = "^5.11.4"
-black = "^24.3.0"
-flake8 = "^7.0.0"
 pre-commit = "^4.1"
 pre-commit-uv = "^4.1.4"
+ruff = "^0.11.0"
 
 [tool.poetry.group.docs]
 optional = true
@@ -63,14 +61,9 @@ sphinx = "^7.2.6"
 sphinx-rtd-theme = "^2.0.0"
 sphinx-autobuild = "^2024.2.4"
 
-[tool.black]
-target-version = [ 'py310' ]
+[tool.ruff]
+target-version = "py311"
 line-length = 120
-
-[tool.isort]
-profile = "black"
-line_length = 120
-src_paths = [ "fraud_eagle", "tests" ]
 
 [tool.pytest.ini_options]
 addopts = "--cov=fraud_eagle --cov-branch --cov-report=term-missing --cov-report=xml"

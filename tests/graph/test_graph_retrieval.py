@@ -1,7 +1,7 @@
 #
 #  test_graph_retrieval.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraud-eagle.
 #
@@ -21,6 +21,7 @@
 
 This class sets up a small sample graph and uses it to all tests.
 """
+
 from collections import defaultdict
 from dataclasses import dataclass
 from random import random

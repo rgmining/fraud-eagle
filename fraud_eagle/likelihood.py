@@ -1,7 +1,7 @@
 #
 #  likelihood.py
 #
-#  Copyright (c) 2016-2023 Junpei Kawamoto
+#  Copyright (c) 2016-2025 Junpei Kawamoto
 #
 #  This file is part of rgmining-fraud-eagle.
 #
@@ -22,6 +22,7 @@
 This module defines a likelihood of a pair of user and product.
 See :meth:`psi` for the detailed definition of the likelihood.
 """
+
 from fraud_eagle.labels import ProductLabel, ReviewLabel, UserLabel
 
 
