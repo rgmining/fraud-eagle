@@ -5,7 +5,7 @@ requires = [ "poetry-core>=2" ]
 
 [project]
 name = "rgmining-fraud-eagle"
-version = "0.10.3"
+version = "0.10.4"
 description = "An implementation of Fraud Eagle algorithm"
 readme = "README.rst"
 keywords = [ "algorithm", "fraud-eagle", "graph", "icwsm", "mining", "review" ]
@@ -44,7 +44,7 @@ packages = [
 include = [ "COPYING" ]
 
 [tool.poetry.group.dev.dependencies]
-bump2version = "^1.0.1"
+bump-my-version = "^1.0.2"
 pytest = "^8.1.1"
 pytest-cov = "^5.0.0"
 pre-commit = "^4.1"
@@ -57,9 +57,9 @@ types-networkx = "^3.4.2.20250312"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "^7.2.6"
-sphinx-rtd-theme = "^2.0.0"
-sphinx-autobuild = "^2024.2.4"
+sphinx = "^8.2.3"
+sphinx-rtd-theme = "^3.0.2"
+sphinx-autobuild = "^2024.10.3"
 
 [tool.ruff]
 target-version = "py311"
@@ -67,6 +67,22 @@ line-length = 120
 
 [tool.pytest.ini_options]
 addopts = "--cov=fraud_eagle --cov-branch --cov-report=term-missing --cov-report=xml"
+
+[tool.bumpversion]
+current_version = "0.10.4"
+commit = true
+pre_commit_hooks = [
+  "poetry lock",
+  "git add poetry.lock",
+]
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "README.rst"
 
 [tool.mypy]
 files = "fraud_eagle/*.py,tests/**/*.py"
