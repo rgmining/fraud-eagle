@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -8,7 +9,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 from datetime import datetime
-from importlib.metadata import version
+from importlib.metadata import version as get_version
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -61,7 +62,7 @@ author = "Junpei Kawamoto"
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = version("rgmining-fraud-eagle")
+release = get_version("rgmining-fraud-eagle")
 # The short X.Y version.
 version = ".".join(release.split(".")[:2])
 
