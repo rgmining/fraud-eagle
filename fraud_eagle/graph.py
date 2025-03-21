@@ -21,7 +21,7 @@
 
 from functools import lru_cache
 from logging import getLogger
-from typing import Final, Optional, cast
+from typing import Final, cast
 
 import networkx as nx
 import numpy as np
@@ -568,7 +568,7 @@ class ReviewGraph:
         reviewers = set(self.retrieve_reviewers(product))
         return cast(float, np.sum([self.retrieve_review(r, product).user_to_product(p_label) for r in reviewers]))
 
-    def prod_message_from_users(self, reviewer: Optional[Reviewer], product: Product, p_label: ProductLabel) -> float:
+    def prod_message_from_users(self, reviewer: Reviewer | None, product: Product, p_label: ProductLabel) -> float:
         """Compute a product of messages to a product except from a reviewer.
 
         This helper function computes a logarithm of the product of messages such as
@@ -625,7 +625,7 @@ class ReviewGraph:
         products = set(self.retrieve_products(reviewer))
         return cast(float, np.sum([self.retrieve_review(reviewer, p).product_to_user(u_label) for p in products]))
 
-    def prod_message_from_products(self, reviewer: Reviewer, product: Optional[Product], u_label: UserLabel) -> float:
+    def prod_message_from_products(self, reviewer: Reviewer, product: Product | None, u_label: UserLabel) -> float:
         """Compute a product of messages sending to a reviewer except from a product.
 
         This helper function computes a logarithm of the product of messages such as
