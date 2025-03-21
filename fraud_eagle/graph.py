@@ -21,7 +21,7 @@
 
 from functools import lru_cache
 from logging import getLogger
-from typing import Any, Final, Optional, cast
+from typing import Final, Optional, cast
 
 import networkx as nx
 import numpy as np
@@ -292,7 +292,7 @@ class ReviewGraph:
         self.products = []
         self.epsilon = epsilon
 
-    def new_reviewer(self, name: str, *_args: Any, **_kwargs: Any) -> Reviewer:
+    def new_reviewer(self, name: str, _anomalous_score: float | None = None) -> Reviewer:
         """Create a new reviewer and add it to this graph.
 
         Args:
@@ -320,7 +320,7 @@ class ReviewGraph:
         self.products.append(product)
         return product
 
-    def add_review(self, reviewer: Reviewer, product: Product, rating: float, *_args: Any, **_kwargs: Any) -> Review:
+    def add_review(self, reviewer: Reviewer, product: Product, rating: float, _time: int | None = None) -> Review:
         """Add a review from a given reviewer to a product.
 
         Args:
