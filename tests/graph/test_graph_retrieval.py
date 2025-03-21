@@ -83,9 +83,15 @@ def test_products(review_graph: GraphFixture) -> None:
 
 def test_retrieve_reviewers(review_graph: GraphFixture) -> None:
     """Test retrieving reviewers from a product."""
-    assert set(review_graph.graph.retrieve_reviewers(review_graph.products[0])) == set(review_graph.reviewers[:1])
-    assert set(review_graph.graph.retrieve_reviewers(review_graph.products[1])) == set(review_graph.reviewers)
-    assert set(review_graph.graph.retrieve_reviewers(review_graph.products[2])) == set(review_graph.reviewers)
+    assert set(
+        review_graph.graph.retrieve_reviewers(review_graph.products[0])
+    ) == set(review_graph.reviewers[:1])
+    assert set(
+        review_graph.graph.retrieve_reviewers(review_graph.products[1])
+    ) == set(review_graph.reviewers)
+    assert set(
+        review_graph.graph.retrieve_reviewers(review_graph.products[2])
+    ) == set(review_graph.reviewers)
 
 
 def test_retrieve_products(review_graph: GraphFixture) -> None:
@@ -94,8 +100,12 @@ def test_retrieve_products(review_graph: GraphFixture) -> None:
     Sample graph used in this test is as same as
     :meth:`test_retrieve_reviewers`.
     """
-    assert set(review_graph.graph.retrieve_products(review_graph.reviewers[0])) == set(review_graph.products)
-    assert set(review_graph.graph.retrieve_products(review_graph.reviewers[1])) == set(review_graph.products[1:])
+    assert set(
+        review_graph.graph.retrieve_products(review_graph.reviewers[0])
+    ) == set(review_graph.products)
+    assert set(
+        review_graph.graph.retrieve_products(review_graph.reviewers[1])
+    ) == set(review_graph.products[1:])
 
 
 def test_retrieve_review(review_graph: GraphFixture) -> None:
@@ -107,7 +117,10 @@ def test_retrieve_review(review_graph: GraphFixture) -> None:
     for i, r in enumerate(review_graph.reviewers):
         for j, p in enumerate(review_graph.products):
             if j in review_graph.reviews[i]:
-                assert review_graph.graph.retrieve_review(r, p) == review_graph.reviews[i][j]
+                assert (
+                    review_graph.graph.retrieve_review(r, p)
+                    == review_graph.reviews[i][j]
+                )
 
 
 def test_update(review_graph: GraphFixture) -> None:
@@ -117,6 +130,8 @@ def test_update(review_graph: GraphFixture) -> None:
     for i in range(10000):
         diff = review_graph.graph.update()
         if diff < threshold:
-            print(f"Update difference become smaller than {threshold} at iteration {i}")
+            print(
+                f"Update difference become smaller than {threshold} at iteration {i}"
+            )
             return
     pytest.fail(f"Update difference didn't converged: {diff}")

@@ -21,7 +21,7 @@
 
 from functools import lru_cache
 from logging import getLogger
-from typing import Any, Final, Optional, cast
+from typing import Final, cast
 
 import networkx as nx
 import numpy as np
@@ -105,9 +105,13 @@ class Reviewer(Node):
         """Anomalous score of this reviewer."""
         b = {}
         for u_label in iter(UserLabel):
-            b[u_label] = phi_u(u_label) + self.graph.prod_message_from_products(self, None, u_label)
+            b[u_label] = phi_u(
+                u_label
+            ) + self.graph.prod_message_from_products(self, None, u_label)
 
-        return cast(float, np.exp(b[UserLabel.FRAUD] - _logaddexp(*b.values())))
+        return cast(
+            float, np.exp(b[UserLabel.FRAUD] - _logaddexp(*b.values()))
+        )
 
 
 class Product(Node):
@@ -135,7 +139,9 @@ class Product(Node):
     def summary(self) -> float:
         """Summary of ratings given to this product."""
         reviewers = self.graph.retrieve_reviewers(self)
-        ratings = [self.graph.retrieve_review(r, self).rating for r in reviewers]
+        ratings = [
+            self.graph.retrieve_review(r, self).rating for r in reviewers
+        ]
         weights = [1 - r.anomalous_score for r in reviewers]
         if sum(weights) == 0:
             return float(np.mean(ratings))
@@ -185,8 +191,14 @@ class Review:
 
     def __init__(self, rating: float) -> None:
         self.rating = rating
-        self._user_to_product = {ProductLabel.GOOD: _LOG_POINT_5, ProductLabel.BAD: _LOG_POINT_5}
-        self._product_to_user = {UserLabel.HONEST: _LOG_POINT_5, UserLabel.FRAUD: _LOG_POINT_5}
+        self._user_to_product = {
+            ProductLabel.GOOD: _LOG_POINT_5,
+            ProductLabel.BAD: _LOG_POINT_5,
+        }
+        self._product_to_user = {
+            UserLabel.HONEST: _LOG_POINT_5,
+            UserLabel.FRAUD: _LOG_POINT_5,
+        }
 
     @property
     def evaluation(self) -> ReviewLabel:
@@ -238,7 +250,9 @@ class Review:
         """
         return self._product_to_user[label]
 
-    def update_user_to_product(self, label: ProductLabel, value: float) -> None:
+    def update_user_to_product(
+        self, label: ProductLabel, value: float
+    ) -> None:
         """Update user-to-product message value.
 
         The argument `label` must be one of the {:data:`ProductLabel.GOOD<fraud_eagle.labels.ProductLabel.GOOD>`,
@@ -286,13 +300,17 @@ class ReviewGraph:
 
     def __init__(self, epsilon: float) -> None:
         if epsilon <= 0.0 or epsilon >= 0.5:
-            raise ValueError("Hyper parameter epsilon must be in (0, 0.5):", epsilon)
+            raise ValueError(
+                "Hyper parameter epsilon must be in (0, 0.5):", epsilon
+            )
         self.graph = nx.DiGraph()
         self.reviewers = []
         self.products = []
         self.epsilon = epsilon
 
-    def new_reviewer(self, name: str, *_args: Any, **_kwargs: Any) -> Reviewer:
+    def new_reviewer(
+        self, name: str, _anomalous_score: float | None = None
+    ) -> Reviewer:
         """Create a new reviewer and add it to this graph.
 
         Args:
@@ -320,7 +338,13 @@ class ReviewGraph:
         self.products.append(product)
         return product
 
-    def add_review(self, reviewer: Reviewer, product: Product, rating: float, *_args: Any, **_kwargs: Any) -> Review:
+    def add_review(
+        self,
+        reviewer: Reviewer,
+        product: Product,
+        rating: float,
+        _time: int | None = None,
+    ) -> Review:
         """Add a review from a given reviewer to a product.
 
         Args:
@@ -430,12 +454,19 @@ class ReviewGraph:
             for product in self.retrieve_products(reviewer):
                 message_to_product = {}
                 for p_label in iter(ProductLabel):
-                    message_to_product[p_label] = self._update_user_to_product(reviewer, product, p_label)
+                    message_to_product[p_label] = self._update_user_to_product(
+                        reviewer, product, p_label
+                    )
                 s = _logaddexp(*message_to_product.values())
                 review = self.retrieve_review(reviewer, product)
                 for p_label in iter(ProductLabel):
                     updated = message_to_product[p_label] - s
-                    diffs.append(abs(np.exp(review.user_to_product(p_label)) - np.exp(updated)))
+                    diffs.append(
+                        abs(
+                            np.exp(review.user_to_product(p_label))
+                            - np.exp(updated)
+                        )
+                    )
                     review.update_user_to_product(p_label, updated)
 
         # Update messages from products to users.
@@ -443,18 +474,28 @@ class ReviewGraph:
             for reviewer in self.retrieve_reviewers(product):
                 message_to_user = {}
                 for u_label in iter(UserLabel):
-                    message_to_user[u_label] = self._update_product_to_user(reviewer, product, u_label)
+                    message_to_user[u_label] = self._update_product_to_user(
+                        reviewer, product, u_label
+                    )
                 s = _logaddexp(*message_to_user.values())
                 review = self.retrieve_review(reviewer, product)
                 for u_label in iter(UserLabel):
                     updated = message_to_user[u_label] - s
-                    diffs.append(abs(np.exp(review.product_to_user(u_label)) - np.exp(updated)))
+                    diffs.append(
+                        abs(
+                            np.exp(review.product_to_user(u_label))
+                            - np.exp(updated)
+                        )
+                    )
                     review.update_product_to_user(u_label, updated)
 
         histo, edges = np.histogram(diffs)
         _LOGGER.info(
             "Differentials:\n"
-            + "\n".join("  {0}-{1}: {2}".format(edges[i], edges[i + 1], v) for i, v in enumerate(histo))
+            + "\n".join(
+                "  {0}-{1}: {2}".format(edges[i], edges[i + 1], v)
+                for i, v in enumerate(histo)
+            )
         )
 
         # Clear memoized values since messages are updated.
@@ -463,7 +504,9 @@ class ReviewGraph:
 
         return max(diffs)
 
-    def _update_user_to_product(self, reviewer: Reviewer, product: Product, p_label: ProductLabel) -> float:
+    def _update_user_to_product(
+        self, reviewer: Reviewer, product: Product, p_label: ProductLabel
+    ) -> float:
         """Compute an updated message from a user to a product with a product label.
 
         The updated message is defined as
@@ -502,7 +545,9 @@ class ReviewGraph:
             )
         return _logaddexp(*res.values())
 
-    def _update_product_to_user(self, reviewer: Reviewer, product: Product, u_label: UserLabel) -> float:
+    def _update_product_to_user(
+        self, reviewer: Reviewer, product: Product, u_label: UserLabel
+    ) -> float:
         """Compute an updated message from a product to a user with a user label.
 
         The updated message is defined as
@@ -542,7 +587,9 @@ class ReviewGraph:
         return _logaddexp(*res.values())
 
     @lru_cache
-    def prod_message_from_all_users(self, product: Product, p_label: ProductLabel) -> float:
+    def prod_message_from_all_users(
+        self, product: Product, p_label: ProductLabel
+    ) -> float:
         """Compute a product of messages to a product.
 
         This helper function computes a logarithm of the product of messages such as
@@ -566,9 +613,22 @@ class ReviewGraph:
           a logarithm of the product defined above.
         """
         reviewers = set(self.retrieve_reviewers(product))
-        return cast(float, np.sum([self.retrieve_review(r, product).user_to_product(p_label) for r in reviewers]))
+        return cast(
+            float,
+            np.sum(
+                [
+                    self.retrieve_review(r, product).user_to_product(p_label)
+                    for r in reviewers
+                ]
+            ),
+        )
 
-    def prod_message_from_users(self, reviewer: Optional[Reviewer], product: Product, p_label: ProductLabel) -> float:
+    def prod_message_from_users(
+        self,
+        reviewer: Reviewer | None,
+        product: Product,
+        p_label: ProductLabel,
+    ) -> float:
         """Compute a product of messages to a product except from a reviewer.
 
         This helper function computes a logarithm of the product of messages such as
@@ -595,11 +655,15 @@ class ReviewGraph:
         sum_all = self.prod_message_from_all_users(product, p_label)
         sum_reviewer = 0.0
         if reviewer is not None:
-            sum_reviewer = self.retrieve_review(reviewer, product).user_to_product(p_label)
+            sum_reviewer = self.retrieve_review(
+                reviewer, product
+            ).user_to_product(p_label)
         return sum_all - sum_reviewer
 
     @lru_cache
-    def prod_message_from_all_products(self, reviewer: Reviewer, u_label: UserLabel) -> float:
+    def prod_message_from_all_products(
+        self, reviewer: Reviewer, u_label: UserLabel
+    ) -> float:
         """Compute a product of messages sending to a reviewer.
 
         This helper function computes a logarithm of the product of messages such as
@@ -623,9 +687,19 @@ class ReviewGraph:
           a logarithm of the product defined above.
         """
         products = set(self.retrieve_products(reviewer))
-        return cast(float, np.sum([self.retrieve_review(reviewer, p).product_to_user(u_label) for p in products]))
+        return cast(
+            float,
+            np.sum(
+                [
+                    self.retrieve_review(reviewer, p).product_to_user(u_label)
+                    for p in products
+                ]
+            ),
+        )
 
-    def prod_message_from_products(self, reviewer: Reviewer, product: Optional[Product], u_label: UserLabel) -> float:
+    def prod_message_from_products(
+        self, reviewer: Reviewer, product: Product | None, u_label: UserLabel
+    ) -> float:
         """Compute a product of messages sending to a reviewer except from a product.
 
         This helper function computes a logarithm of the product of messages such as
@@ -652,6 +726,8 @@ class ReviewGraph:
         sum_all = self.prod_message_from_all_products(reviewer, u_label)
         sum_product = 0.0
         if product is not None:
-            sum_product = self.retrieve_review(reviewer, product).product_to_user(u_label)
+            sum_product = self.retrieve_review(
+                reviewer, product
+            ).product_to_user(u_label)
 
         return sum_all - sum_product
