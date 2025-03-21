@@ -27,7 +27,12 @@ from fraud_eagle.labels import ProductLabel, ReviewLabel, UserLabel
 
 
 # pylint: disable=too-many-branches
-def psi(u_label: UserLabel, p_label: ProductLabel, r_label: ReviewLabel, epsilon: float) -> float:
+def psi(
+    u_label: UserLabel,
+    p_label: ProductLabel,
+    r_label: ReviewLabel,
+    epsilon: float,
+) -> float:
     """Likelihood of a pair of user and product.
 
     The likelihood is dependent on the review of the user gives the product.

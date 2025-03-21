@@ -76,4 +76,6 @@ def test_anomalous_score() -> None:
 
     b_honest = 2 * 0.3 * 0.6 * 0.8
     b_fraud = 2 * 0.7 * 0.4 * 0.2
-    assert_almost_equal(reviewer.anomalous_score, b_fraud / (b_honest + b_fraud))
+    assert_almost_equal(
+        reviewer.anomalous_score, b_fraud / (b_honest + b_fraud)
+    )
