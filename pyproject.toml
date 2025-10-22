@@ -5,7 +5,7 @@ requires = [ "poetry-core>=2" ]
 
 [project]
 name = "rgmining-fraud-eagle"
-version = "0.10.5"
+version = "0.10.6"
 description = "An implementation of Fraud Eagle algorithm"
 readme = "README.rst"
 keywords = [ "algorithm", "fraud-eagle", "graph", "icwsm", "mining", "review" ]
@@ -70,7 +70,7 @@ line-length = 79
 addopts = "--cov=fraud_eagle --cov-branch --cov-report=term-missing --cov-report=xml"
 
 [tool.bumpversion]
-current_version = "0.10.5"
+current_version = "0.10.6"
 commit = true
 pre_commit_hooks = [
   "poetry lock",

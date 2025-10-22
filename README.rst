@@ -34,7 +34,7 @@ for more detail.
    :target: https://www.gnu.org/copyleft/gpl.html
 .. |Build Status| image:: https://github.com/rgmining/fraud-eagle/actions/workflows/python-lib.yaml/badge.svg
    :target: https://github.com/rgmining/fraud-eagle/actions/workflows/python-lib.yaml
-.. |Release| image:: https://img.shields.io/badge/release-0.10.5-brightgreen.svg
+.. |Release| image:: https://img.shields.io/badge/release-0.10.6-brightgreen.svg
    :target: https://pypi.org/project/rgmining-fraud-eagle/
 .. |Japanese| image:: https://img.shields.io/badge/qiita-%E6%97%A5%E6%9C%AC%E8%AA%9E-brightgreen.svg
    :target: http://qiita.com/jkawamoto/items/d2284316cc37cd810bfd
